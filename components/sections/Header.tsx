@@ -7,7 +7,6 @@ import MagneticButton from '@/components/ui/MagneticButton'
 const navItems = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Process', href: '#process' },
   { name: 'Industries', href: '#industries' },
   { name: 'Contact', href: '#contact' },
 ]
@@ -85,8 +84,8 @@ export default function Header() {
       <div className="container mx-auto px-4 md:px-6">
         <motion.nav
           className={`relative rounded-full transition-all duration-500 mx-auto max-w-7xl ${isScrolled
-              ? 'bg-background/70 backdrop-blur-md border border-electric-blue/20 shadow-lg shadow-electric-blue/5'
-              : 'bg-transparent border border-transparent'
+            ? 'bg-background/70 backdrop-blur-md border border-electric-blue/20 shadow-lg shadow-electric-blue/5'
+            : 'bg-transparent border border-transparent'
             }`}
         >
           <div className={`flex items-center justify-between px-4 sm:px-6 transition-all duration-500 ${isScrolled ? 'py-2' : 'py-2'
@@ -206,8 +205,8 @@ export default function Header() {
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.href)}
                       className={`block text-3xl font-heading font-bold text-center py-2 transition-colors duration-300 ${activeSection === item.href.replace('#', '')
-                          ? 'text-electric-blue'
-                          : 'text-zinc-500 hover:text-white'
+                        ? 'text-electric-blue'
+                        : 'text-zinc-500 hover:text-white'
                         }`}
                     >
                       {item.name}

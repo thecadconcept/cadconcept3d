@@ -102,35 +102,24 @@ export default function BlueprintSVG() {
           )
         })}
 
-        {/* Dimensions */}
+        {/* Crosshair (Center) */}
         <motion.g
           stroke="#00E5FF"
-          strokeWidth="1"
-          opacity="0.6"
+          strokeWidth="1.5"
           initial="hidden"
           animate="visible"
         >
-          <motion.line
-            x1="120"
-            y1="200"
-            x2="280"
-            y2="200"
-            variants={pathVariants}
-          />
-          <motion.line
-            x1="120"
-            y1="195"
-            x2="120"
-            y2="205"
-            variants={pathVariants}
-          />
-          <motion.line
-            x1="280"
-            y1="195"
-            x2="280"
-            y2="205"
-            variants={pathVariants}
-          />
+          <motion.line x1="180" y1="200" x2="220" y2="200" variants={pathVariants} />
+          <motion.line x1="200" y1="180" x2="200" y2="220" variants={pathVariants} />
+        </motion.g>
+
+        {/* Top Left Target Icon */}
+        <motion.g
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.circle cx="40" cy="40" r="10" stroke="#00E5FF" strokeWidth="2" fill="none" variants={pathVariants} />
+          <motion.circle cx="40" cy="40" r="3" fill="#00E5FF" variants={pathVariants} />
         </motion.g>
       </svg>
     </div>
