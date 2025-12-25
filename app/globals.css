@@ -4,13 +4,7 @@
 
 @layer base {
   * {
-    @apply border-gray-800;
-  }
-
-  body {
-    @apply bg-background text-soft-white;
-    overflow-x: hidden;
-    overflow-y: auto;
+    @apply border-gray-800 box-border;
   }
 
   html {
@@ -18,9 +12,15 @@
     overflow-x: hidden;
   }
 
-  #__next,
-  main {
+  body {
+    @apply bg-background text-soft-white font-sans;
     overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Typography Defaults */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
   }
 }
 
@@ -30,7 +30,7 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-electric-blue to-metallic-silver bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
   }
 
   .glow-effect {
@@ -39,6 +39,11 @@
 
   .glow-effect-strong {
     box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
+  }
+  
+  /* Utility for keeping content centered */
+  .content-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
 
@@ -66,33 +71,6 @@
     linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
-}
-
-/* Smooth scroll behavior */
-html.lenis {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
-}
-
-/* Performance optimizations */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Prevent layout shift */

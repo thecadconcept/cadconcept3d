@@ -3,6 +3,8 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import MagneticButton from '@/components/ui/MagneticButton'
+import { Button } from '@/components/ui/Button'
+import Container from '@/components/ui/Container'
 
 const contactInfo = [
   {
@@ -82,14 +84,14 @@ export default function Contact() {
     <section
       ref={ref}
       id="contact"
-      className="relative min-h-screen py-32 px-4 md:px-8 lg:px-16 overflow-hidden"
+      className="relative min-h-screen py-32 overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 grid-pattern" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <Container className="relative z-10">
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
@@ -99,7 +101,7 @@ export default function Contact() {
           <h2 className="font-heading text-4xl md:text-5xl font-bold uppercase tracking-widest gradient-text mb-6">
             Get In Touch
           </h2>
-          <p className="text-xl text-metallic-silver max-w-2xl mx-auto">
+          <p className="text-xl text-accent max-w-2xl mx-auto">
             Ready to transform your physical parts into precision CAD models?
             Let&apos;s discuss your project.
           </p>
@@ -114,10 +116,10 @@ export default function Contact() {
           {/* Contact Information */}
           <motion.div variants={itemVariants} className="space-y-8">
             <div>
-              <h3 className="font-heading text-2xl font-bold uppercase tracking-wide mb-6 text-electric-blue">
+              <h3 className="font-heading text-2xl font-bold uppercase tracking-wide mb-6 text-primary">
                 Contact Information
               </h3>
-              <p className="text-metallic-silver mb-8 leading-relaxed">
+              <p className="text-accent mb-8 leading-relaxed">
                 We&apos;re here to help you with all your reverse engineering and
                 scan to CAD needs. Reach out to us through any of the following
                 channels.
@@ -129,18 +131,18 @@ export default function Contact() {
                 <motion.a
                   key={index}
                   href={info.link}
-                  className="flex items-start gap-4 p-6 border border-electric-blue/30 bg-background/50 backdrop-blur-sm hover:border-electric-blue transition-all duration-300 group"
+                  className="flex items-start gap-4 p-6 border border-primary/30 bg-background/50 backdrop-blur-sm hover:border-primary transition-all duration-300 group rounded-lg"
                   variants={itemVariants}
                   whileHover={{ x: 5, transition: { duration: 0.3 } }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-electric-blue/20 border border-electric-blue/50 flex items-center justify-center text-2xl flex-shrink-0 group-hover:bg-electric-blue/30 transition-colors">
+                  <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-2xl flex-shrink-0 group-hover:bg-primary/30 transition-colors">
                     {info.icon}
                   </div>
                   <div>
-                    <h4 className="text-sm uppercase tracking-wide text-electric-blue mb-1 font-medium">
+                    <h4 className="text-sm uppercase tracking-wide text-primary mb-1 font-medium">
                       {info.label}
                     </h4>
-                    <p className="text-lg text-soft-white group-hover:text-electric-blue transition-colors">
+                    <p className="text-lg text-soft-white group-hover:text-primary transition-colors">
                       {info.value}
                     </p>
                   </div>
@@ -150,7 +152,7 @@ export default function Contact() {
 
             {/* Social Links */}
             <motion.div variants={itemVariants} className="pt-8">
-              <h4 className="font-heading text-lg font-bold uppercase tracking-wide mb-4 text-electric-blue">
+              <h4 className="font-heading text-lg font-bold uppercase tracking-wide mb-4 text-primary">
                 Follow Us
               </h4>
               <div className="flex gap-4">
@@ -158,7 +160,7 @@ export default function Contact() {
                   <motion.a
                     key={index}
                     href="#"
-                    className="w-12 h-12 rounded-full border border-electric-blue/30 bg-background/50 backdrop-blur-sm flex items-center justify-center text-electric-blue hover:border-electric-blue hover:bg-electric-blue/10 transition-all"
+                    className="w-12 h-12 rounded-full border border-primary/30 bg-background/50 backdrop-blur-sm flex items-center justify-center text-primary hover:border-primary hover:bg-primary/10 transition-all"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -173,12 +175,12 @@ export default function Contact() {
           <motion.div variants={itemVariants}>
             <form
               onSubmit={handleSubmit}
-              className="space-y-6 p-8 border border-electric-blue/30 bg-background/50 backdrop-blur-sm"
+              className="space-y-6 p-8 border border-primary/30 bg-background/50 backdrop-blur-sm rounded-xl"
             >
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm uppercase tracking-wide text-electric-blue mb-2 font-medium"
+                  className="block text-sm uppercase tracking-wide text-primary mb-2 font-medium"
                 >
                   Full Name
                 </label>
@@ -189,7 +191,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-background/80 border border-electric-blue/30 text-soft-white placeholder-metallic-silver/50 focus:outline-none focus:border-electric-blue transition-all"
+                  className="w-full px-4 py-3 bg-background/80 border border-primary/30 text-soft-white placeholder-accent/50 focus:outline-none focus:border-primary transition-all rounded-md"
                   placeholder="John Doe"
                 />
               </div>
@@ -197,7 +199,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm uppercase tracking-wide text-electric-blue mb-2 font-medium"
+                  className="block text-sm uppercase tracking-wide text-primary mb-2 font-medium"
                 >
                   Email Address
                 </label>
@@ -208,7 +210,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-background/80 border border-electric-blue/30 text-soft-white placeholder-metallic-silver/50 focus:outline-none focus:border-electric-blue transition-all"
+                  className="w-full px-4 py-3 bg-background/80 border border-primary/30 text-soft-white placeholder-accent/50 focus:outline-none focus:border-primary transition-all rounded-md"
                   placeholder="john@example.com"
                 />
               </div>
@@ -216,7 +218,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="phone"
-                  className="block text-sm uppercase tracking-wide text-electric-blue mb-2 font-medium"
+                  className="block text-sm uppercase tracking-wide text-primary mb-2 font-medium"
                 >
                   Phone Number
                 </label>
@@ -226,7 +228,7 @@ export default function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-background/80 border border-electric-blue/30 text-soft-white placeholder-metallic-silver/50 focus:outline-none focus:border-electric-blue transition-all"
+                  className="w-full px-4 py-3 bg-background/80 border border-primary/30 text-soft-white placeholder-accent/50 focus:outline-none focus:border-primary transition-all rounded-md"
                   placeholder="+1 (555) 123-4567"
                 />
               </div>
@@ -234,7 +236,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm uppercase tracking-wide text-electric-blue mb-2 font-medium"
+                  className="block text-sm uppercase tracking-wide text-primary mb-2 font-medium"
                 >
                   Message
                 </label>
@@ -245,26 +247,26 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-background/80 border border-electric-blue/30 text-soft-white placeholder-metallic-silver/50 focus:outline-none focus:border-electric-blue transition-all resize-none"
+                  className="w-full px-4 py-3 bg-background/80 border border-primary/30 text-soft-white placeholder-accent/50 focus:outline-none focus:border-primary transition-all resize-none rounded-md"
                   placeholder="Tell us about your project..."
                 />
               </div>
 
               <MagneticButton>
-                <motion.button
+                <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-electric-blue text-background font-bold uppercase tracking-wider rounded-sm hover:bg-opacity-90 transition-all glow-effect disabled:opacity-50 disabled:cursor-not-allowed"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="w-full shadow-[0_0_20px_rgba(0,229,255,0.4)]"
+                  variant='primary'
+                  size='lg'
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
-                </motion.button>
+                </Button>
               </MagneticButton>
             </form>
           </motion.div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   )
 }

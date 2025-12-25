@@ -6,17 +6,30 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
+      },
+    },
     extend: {
       colors: {
         background: '#0A0A0A',
-        'dark-charcoal': '#0A0A0A',
-        'electric-blue': '#00E5FF',
-        'metallic-silver': '#C0C0C0',
+        primary: '#00E5FF', // Electric Blue
+        secondary: '#0A0A0A', // Dark Charcoal
+        accent: '#C0C0C0', // Metallic Silver
         'soft-white': '#EAEAEA',
+        'electric-blue': '#00E5FF', // Keeping for backward compatibility if needed
+        'metallic-silver': '#C0C0C0', // Keeping for backward compatibility
+        'dark-charcoal': '#0A0A0A', // Keeping for backward compatibility
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Space Grotesk', 'Inter', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-manrope)', 'var(--font-space-grotesk)', 'sans-serif'], // Added Manrope
       },
       letterSpacing: {
         wide: '0.1em',
@@ -37,8 +50,11 @@ module.exports = {
           '100%': { opacity: '1' },
         },
       },
+      screens: {
+        'xs': '475px',
+        '3xl': '1920px',
+      },
     },
   },
   plugins: [],
 }
-
