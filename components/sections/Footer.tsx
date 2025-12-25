@@ -7,7 +7,7 @@ import MagneticButton from '@/components/ui/MagneticButton'
 const socialLinks = [
   { name: 'LinkedIn', icon: 'in', href: '#' },
   { name: 'Twitter', icon: 'tw', href: '#' },
-  { name: 'Email', icon: '@', href: 'mailto:info@cadconcept.com' },
+  { name: 'Email', icon: '@', href: 'mailto:thecadconcept3d@gmail.com' },
 ]
 
 const quickLinks = [
@@ -155,16 +155,16 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-full border border-electric-blue/30 flex items-center justify-center">
                   <span className="text-electric-blue text-xs">@</span>
                 </div>
-                <a href="mailto:info@cadconcept.com" className="hover:text-electric-blue transition-colors">
-                  info@cadconcept.com
+                <a href="mailto:thecadconcept3d@gmail.com" className="hover:text-electric-blue transition-colors">
+                  thecadconcept3d@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full border border-electric-blue/30 flex items-center justify-center">
                   <span className="text-electric-blue text-xs">📞</span>
                 </div>
-                <a href="tel:+15551234567" className="hover:text-electric-blue transition-colors">
-                  +1 (555) 123-4567
+                <a href="tel:+918401440804" className="hover:text-electric-blue transition-colors">
+                  +91 8401440804
                 </a>
               </li>
               <li className="flex items-center gap-3">

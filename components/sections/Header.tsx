@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import MagneticButton from '@/components/ui/MagneticButton'
+import { useLenis } from '@/components/SmoothScroll'
 
 const navItems = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
   { name: 'Industries', href: '#industries' },
   { name: 'Contact', href: '#contact' },
 ]
@@ -15,43 +17,38 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
-  const { scrollY } = useScroll()
+  // const { scrollY } = useScroll() // Removing framer-motion useScroll to treat global window scroll unified
+  const lenis = useLenis()
 
-  // Optimized scroll detection
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const scrolled = latest > 50
-    if (scrolled !== isScrolled) {
-      setIsScrolled(scrolled)
-    }
-  })
-
+  // Handle Scroll Spy using standard window events (throttled)
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout
+    // We can use a ref to track if we are programmatically scrolling
+    // This avoids the scroll spy listener overriding the clicked state during animation
+    const handleScroll = () => {
+      // If we simply rely on the scroll position, it should eventually settle correct.
+      // The issue might be the offset calculation.
 
-    const handleScrollSpy = () => {
-      clearTimeout(scrollTimeout)
-      scrollTimeout = setTimeout(() => {
-        const sections = navItems.map(item => item.href.replace('#', ''))
+      // Center of viewport strategy usually works best for "what am I looking at"
+      const scrollPosition = window.scrollY + window.innerHeight * 0.4
 
-        for (const section of sections) {
-          const element = document.getElementById(section)
-          if (element) {
-            const rect = element.getBoundingClientRect()
-            // Improved detection logic
-            if (rect.top <= 200 && rect.bottom >= 100) {
-              setActiveSection(section)
-              break // Stop checking once we find the top-most active section
-            }
+      let currentId = 'home'
+      for (const item of navItems) {
+        const id = item.href.replace('#', '')
+        const element = document.getElementById(id)
+        if (element) {
+          const { offsetTop } = element
+          if (scrollPosition >= offsetTop) {
+            currentId = id
           }
         }
-      }, 100)
+      }
+      setActiveSection(currentId)
+      setIsScrolled(window.scrollY > 50)
     }
 
-    window.addEventListener('scroll', handleScrollSpy, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScrollSpy)
-      clearTimeout(scrollTimeout)
-    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -60,16 +57,32 @@ export default function Header() {
     setActiveSection(targetId)
     setIsMobileMenuOpen(false)
 
-    const element = document.getElementById(targetId)
-    if (element) {
-      const offset = 80 // Slightly less offset for better fit
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
+    if (lenis) {
+      const isHome = targetId === 'home'
+      // Use lenis for smooth scroll
+      lenis.scrollTo(isHome ? 0 : href, {
+        offset: -80,
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Same easing as Lenis init
+        immediate: false,
+        lock: true, // Lock user interaction while scrolling? maybe false
+        onComplete: () => {
+          // Optional: Force set active section again to be sure
+          setActiveSection(targetId)
+        }
       })
+    } else {
+      // Fallback
+      const element = document.getElementById(targetId)
+      if (element) {
+        const offset = 80
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - offset
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        })
+      }
     }
   }
 

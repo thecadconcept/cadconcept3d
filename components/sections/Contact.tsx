@@ -8,20 +8,20 @@ const contactInfo = [
   {
     icon: '📍',
     label: 'Address',
-    value: '123 Engineering St, Tech City, TC 12345',
+    value: 'Ahmedabad, Gujarat, India',
     link: '#',
   },
   {
     icon: '📞',
     label: 'Phone',
-    value: '+1 (555) 123-4567',
-    link: 'tel:+15551234567',
+    value: '+91 8401440804',
+    link: 'tel:+918401440804',
   },
   {
     icon: '✉️',
     label: 'Email',
-    value: 'info@cadconcept.com',
-    link: 'mailto:info@cadconcept.com',
+    value: 'thecadconcept3d@gmail.com',
+    link: 'mailto:thecadconcept3d@gmail.com',
   },
 ]
 

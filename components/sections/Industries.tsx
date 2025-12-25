@@ -5,34 +5,49 @@ import { motion, useInView } from 'framer-motion'
 
 const industries = [
   {
-    name: 'Automotive',
-    description: 'Precision scanning and reverse engineering for automotive components and assemblies.',
+    name: 'Industrial & Manufacturing',
+    description: 'Optimizing production lines and reverse engineering legacy machinery parts.',
+    icon: '🏭',
+  },
+  {
+    name: 'Automotive & Transportation',
+    description: 'Precision scanning for aftermarket parts, restoration, and vehicle design.',
     icon: '🚗',
   },
   {
-    name: 'Aerospace',
+    name: 'Aerospace & Defense',
     description: 'High-tolerance metrology and surface modeling for critical flight components.',
     icon: '✈️',
   },
   {
-    name: 'Manufacturing',
-    description: 'Digitizing tooling, fixtures, and molds for reproduction and inventory.',
-    icon: '⚙️',
+    name: 'Mining & Heavy Machinery',
+    description: 'Digital archiving and wear analysis for large-scale excavators and equipment.',
+    icon: '🚜',
   },
   {
-    name: 'Tooling',
-    description: 'Verification and repair of complex injection molds, dies, and jigs.',
-    icon: '🔧',
+    name: 'Marine & Shipbuilding',
+    description: 'Hull scanning, hydrodynamics analysis, and refit planning for vessels.',
+    icon: '🚢',
   },
   {
-    name: 'Medical Devices',
-    description: 'FDA-compliant quality inspection and reverse engineering of medical equipment.',
-    icon: '🏥',
+    name: 'Architecture & Construction',
+    description: 'Scan-to-BIM and as-built documentation for structures and heritage sites.',
+    icon: '🏗️',
   },
   {
-    name: 'Defense',
-    description: 'Secure and reliable scanning solutions for defense and military applications.',
-    icon: '🛡️',
+    name: 'Medical & Healthcare',
+    description: 'Custom prosthetics design and reverse engineering of medical devices.',
+    icon: '⚕️',
+  },
+  {
+    name: 'Consumer Products & Electronics',
+    description: 'Accelerating product development cycles for gadgets and appliances.',
+    icon: '📱',
+  },
+  {
+    name: 'Rapid Prototyping & Product Development',
+    description: 'Iterative design support and preparation for additive manufacturing.',
+    icon: '⚡',
   },
 ]
 

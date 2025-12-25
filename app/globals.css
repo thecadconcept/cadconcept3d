@@ -6,7 +6,7 @@
   * {
     @apply border-gray-800;
   }
-  
+
   body {
     @apply bg-background text-soft-white;
     overflow-x: hidden;
@@ -62,7 +62,7 @@
 
 /* Grid background pattern */
 .grid-pattern {
-  background-image: 
+  background-image:
     linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
@@ -96,8 +96,8 @@ html.lenis {
 }
 
 /* Prevent layout shift */
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
 }
-
