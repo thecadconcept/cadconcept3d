@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import MagneticButton from '@/components/ui/MagneticButton'
-import { useLenis } from '@/components/SmoothScroll'
+import { Button } from '@/components/ui/Button'
+import Container from '@/components/ui/Container'
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -17,33 +18,35 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
-  // const { scrollY } = useScroll() // Removing framer-motion useScroll to treat global window scroll unified
-  const lenis = useLenis()
 
-  // Handle Scroll Spy using standard window events (throttled)
   useEffect(() => {
-    // We can use a ref to track if we are programmatically scrolling
-    // This avoids the scroll spy listener overriding the clicked state during animation
+    let ticking = false
+
     const handleScroll = () => {
-      // If we simply rely on the scroll position, it should eventually settle correct.
-      // The issue might be the offset calculation.
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + window.innerHeight * 0.4
+          let currentId = 'home'
 
-      // Center of viewport strategy usually works best for "what am I looking at"
-      const scrollPosition = window.scrollY + window.innerHeight * 0.4
-
-      let currentId = 'home'
-      for (const item of navItems) {
-        const id = item.href.replace('#', '')
-        const element = document.getElementById(id)
-        if (element) {
-          const { offsetTop } = element
-          if (scrollPosition >= offsetTop) {
-            currentId = id
+          for (const item of navItems) {
+            const id = item.href.replace('#', '')
+            const element = document.getElementById(id)
+            if (element) {
+              const { offsetTop } = element
+              // Add a small buffer zone
+              if (scrollPosition >= offsetTop - 100) {
+                currentId = id
+              }
+            }
           }
-        }
+
+          setActiveSection(currentId)
+          setIsScrolled(window.scrollY > 20)
+          ticking = false
+        })
+
+        ticking = true
       }
-      setActiveSection(currentId)
-      setIsScrolled(window.scrollY > 50)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -51,38 +54,21 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault()
     const targetId = href.replace('#', '')
     setActiveSection(targetId)
     setIsMobileMenuOpen(false)
 
-    if (lenis) {
-      const isHome = targetId === 'home'
-      // Use lenis for smooth scroll
-      lenis.scrollTo(isHome ? 0 : href, {
-        offset: -80,
-        duration: 1.5,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Same easing as Lenis init
-        immediate: false,
-        lock: true, // Lock user interaction while scrolling? maybe false
-        onComplete: () => {
-          // Optional: Force set active section again to be sure
-          setActiveSection(targetId)
-        }
+    const element = document.getElementById(targetId)
+    if (element) {
+      const offset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
       })
-    } else {
-      // Fallback
-      const element = document.getElementById(targetId)
-      if (element) {
-        const offset = 80
-        const elementPosition = element.getBoundingClientRect().top
-        const offsetPosition = elementPosition + window.pageYOffset - offset
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        })
-      }
     }
   }
 
@@ -94,10 +80,10 @@ export default function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <Container>
         <motion.nav
-          className={`relative rounded-full transition-all duration-500 mx-auto max-w-7xl ${isScrolled
-            ? 'bg-background/70 backdrop-blur-md border border-electric-blue/20 shadow-lg shadow-electric-blue/5'
+          className={`relative rounded-full transition-all duration-500 mx-auto w-full ${isScrolled
+            ? 'bg-background/80 backdrop-blur-md border border-white/10 shadow-lg shadow-black/5'
             : 'bg-transparent border border-transparent'
             }`}
         >
@@ -111,19 +97,17 @@ export default function Header() {
               whileHover="hover"
             >
               <motion.div
-                className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric-blue/20 to-purple-500/20 border border-electric-blue/50 flex items-center justify-center overflow-hidden"
+                className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/50 flex items-center justify-center overflow-hidden"
                 variants={{
                   hover: { rotate: 180, borderRadius: "50%" }
                 }}
                 transition={{ duration: 0.6, ease: "backOut" }}
               >
-                <div className="w-4 h-4 bg-electric-blue rounded-sm transform rotate-45 group-hover:bg-white transition-colors duration-300" />
+                <div className="w-4 h-4 bg-primary rounded-sm transform rotate-45 group-hover:bg-white transition-colors duration-300" />
               </motion.div>
-              <div className="flex flex-col">
-                <span className="text-lg font-heading font-bold tracking-tight leading-none text-white">
-                  CAD<span className="text-electric-blue">Concept</span>
-                </span>
-              </div>
+              <h3 className="font-heading text-xl font-bold tracking-tight text-white">
+                CAD<span className="text-primary">Concept</span> 3D
+              </h3>
             </motion.a>
 
             {/* Desktop Navigation */}
@@ -131,18 +115,22 @@ export default function Header() {
               {navItems.map((item) => {
                 const isActive = activeSection === item.href.replace('#', '')
                 return (
-                  <li key={item.name}>
+                  <li key={item.name} className="relative z-10">
                     <motion.a
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.href)}
-                      className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors duration-300 block ${isActive ? 'text-background' : 'text-zinc-400 hover:text-white'
+                      className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors duration-300 block ${isActive ? 'text-black' : 'text-zinc-400 hover:text-white'
                         }`}
                     >
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
-                          className="absolute inset-0 bg-electric-blue rounded-full"
-                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                          className="absolute inset-0 bg-primary rounded-full shadow-[0_0_10px_rgba(0,229,255,0.3)]"
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 30
+                          }}
                         />
                       )}
                       <span className="relative z-10">{item.name}</span>
@@ -156,13 +144,14 @@ export default function Header() {
             <div className="flex items-center gap-4">
               <div className="hidden lg:block">
                 <MagneticButton>
-                  <motion.button
-                    className="px-6 py-2.5 bg-transparent border border-electric-blue/30 text-electric-blue font-medium rounded-full text-sm hover:bg-electric-blue hover:text-background transition-all duration-300 backdrop-blur-sm"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full border-primary/30 text-primary hover:bg-primary hover:text-black"
+                    onClick={(e) => handleNavClick(e, '#contact')}
                   >
                     Get Quote
-                  </motion.button>
+                  </Button>
                 </MagneticButton>
               </div>
 
@@ -191,7 +180,7 @@ export default function Header() {
             </div>
           </div>
         </motion.nav>
-      </div>
+      </Container>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -201,7 +190,7 @@ export default function Header() {
             animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-40 bg-background/90 lg:hidden flex flex-col justify-center items-center"
+            className="fixed inset-0 z-40 bg-background/95 lg:hidden flex flex-col justify-center items-center"
           >
             <nav className="w-full max-w-sm px-6">
               <ul className="space-y-4 flex flex-col items-center">
@@ -218,7 +207,7 @@ export default function Header() {
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.href)}
                       className={`block text-3xl font-heading font-bold text-center py-2 transition-colors duration-300 ${activeSection === item.href.replace('#', '')
-                        ? 'text-electric-blue'
+                        ? 'text-primary'
                         : 'text-zinc-500 hover:text-white'
                         }`}
                     >
@@ -235,9 +224,13 @@ export default function Header() {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="mt-12 flex justify-center"
               >
-                <button className="px-8 py-3 bg-electric-blue text-background font-bold rounded-full text-lg shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.6)] transition-all transform hover:-translate-y-1">
-                  Get Started Project
-                </button>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="rounded-full shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.6)]"
+                >
+                  Start Project
+                </Button>
               </motion.div>
             </nav>
           </motion.div>

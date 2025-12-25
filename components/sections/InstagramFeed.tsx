@@ -1,0 +1,165 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { Button } from '@/components/ui/Button'
+
+interface InstagramFeedProps {
+    username: string
+}
+
+interface InstagramPost {
+    id: string
+    media_url: string
+    permalink: string
+    caption?: string
+    media_type: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM'
+}
+
+interface InstagramProfile {
+    username: string
+    posts_count: number
+    followers_count: number
+    following_count: number
+    profile_picture_url?: string
+}
+
+export default function InstagramFeed({ username }: InstagramFeedProps) {
+    const [posts, setPosts] = useState<InstagramPost[]>([])
+    const [profile, setProfile] = useState<InstagramProfile | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    // NOTE: In a real production app, you would fetch this from your backend
+    // which holds the long-lived access token.
+    // For this demo, we'll simulate the data fetching structure.
+
+    useEffect(() => {
+        const fetchInstagramData = async () => {
+            setIsLoading(true)
+            try {
+                // SIMULATED API CALL
+                // In reality: const res = await fetch(`/api/instagram?username=${username}`)
+
+                await new Promise(resolve => setTimeout(resolve, 1000)) // Fake delay
+
+                // Mock Data reflecting the structure we'd get from the Graph API
+                setProfile({
+                    username: username,
+                    posts_count: 124,
+                    followers_count: 5300,
+                    following_count: 1200,
+                    profile_picture_url: '' // We'll use the gradient placeholder if empty
+                })
+
+                setPosts([
+                    { id: '1', media_url: '', permalink: '#', media_type: 'IMAGE' },
+                    { id: '2', media_url: '', permalink: '#', media_type: 'IMAGE' },
+                    { id: '3', media_url: '', permalink: '#', media_type: 'IMAGE' },
+                    { id: '4', media_url: '', permalink: '#', media_type: 'IMAGE' },
+                    { id: '5', media_url: '', permalink: '#', media_type: 'IMAGE' },
+                    { id: '6', media_url: '', permalink: '#', media_type: 'IMAGE' },
+                ])
+
+            } catch (err) {
+                setError('Failed to load Instagram feed')
+                console.error(err)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        if (username) {
+            fetchInstagramData()
+        }
+    }, [username])
+
+    if (error) return null
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-20 border-b border-white/5 pb-10"
+        >
+            {/* Profile Header */}
+            <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+                <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-orange-500 to-purple-600">
+                        <div className="w-full h-full bg-black rounded-full p-1">
+                            <div className="w-full h-full rounded-full bg-white/10 flex items-center justify-center font-bold text-xl text-white overflow-hidden">
+                                {profile?.profile_picture_url ? (
+                                    <img src={profile.profile_picture_url} alt={username} className="w-full h-full object-cover" />
+                                ) : (
+                                    <span>{username.slice(0, 2).toUpperCase()}</span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 className="font-heading font-bold text-xl text-white flex items-center gap-2">
+                            {username}
+                            <span className="text-blue-500 text-sm">✓</span>
+                        </h4>
+                        <p className="text-accent text-sm">@{username.toLowerCase().replace(/\s/g, '')} • Engineering & Design</p>
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-6 text-sm">
+                    <div className="text-center">
+                        <span className="block font-bold text-white text-lg">
+                            {isLoading ? '-' : profile?.posts_count}
+                        </span>
+                        <span className="text-accent text-xs">Posts</span>
+                    </div>
+                    <div className="text-center">
+                        <span className="block font-bold text-white text-lg">
+                            {isLoading ? '-' : (profile?.followers_count ? (profile.followers_count / 1000).toFixed(1) + 'k' : 0)}
+                        </span>
+                        <span className="text-accent text-xs">Followers</span>
+                    </div>
+                    <div className="text-center">
+                        <span className="block font-bold text-white text-lg">
+                            {isLoading ? '-' : (profile?.following_count ? (profile.following_count / 1000).toFixed(1) + 'k' : 0)}
+                        </span>
+                        <span className="text-accent text-xs">Following</span>
+                    </div>
+                    <Button variant="primary" size="sm" className="rounded-full px-6 ml-4" onClick={() => window.open(`https://instagram.com/${username}`, '_blank')}>
+                        Follow
+                    </Button>
+                </div>
+            </div>
+
+            {/* Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {isLoading ? (
+                    // Skeleton Loading
+                    [...Array(6)].map((_, i) => (
+                        <div key={i} className="aspect-square rounded-xl bg-white/5 animate-pulse" />
+                    ))
+                ) : (
+                    posts.map((post) => (
+                        <motion.div
+                            key={post.id}
+                            className="aspect-square rounded-xl bg-white/5 border border-white/10 relative overflow-hidden group cursor-pointer"
+                            whileHover={{ scale: 1.02 }}
+                            onClick={() => window.open(post.permalink, '_blank')}
+                        >
+                            {post.media_url ? (
+                                <img src={post.media_url} alt="Instagram Post" className="w-full h-full object-cover" />
+                            ) : (
+                                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-30 group-hover:opacity-50 transition-opacity" />
+                            )}
+
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                                <span className="text-white text-2xl">❤️</span>
+                            </div>
+                        </motion.div>
+                    ))
+                )}
+            </div>
+        </motion.div>
+    )
+}

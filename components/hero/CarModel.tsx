@@ -70,8 +70,8 @@ export default function CarModel() {
                     <scannerShader
                         ref={materialRef}
                         uColor={new THREE.Color('#222222')}
-                        uScanColor={new THREE.Color('#00FFFF')}
-                        uWireframeColor={new THREE.Color('#00FFAA')}
+                        uScanColor={new THREE.Color('#00E5FF')} // Primary
+                        uWireframeColor={new THREE.Color('#00E5FF')} // Primary
                         uCadColor={new THREE.Color('#FFFFFF')}
                     />
                 </mesh>
@@ -79,16 +79,16 @@ export default function CarModel() {
 
             {/* Floating UI - 3D tracked DOM elements */}
             <Html position={[2.5, 1, 0]} className="pointer-events-none select-none w-40">
-                <div className="bg-black/40 backdrop-blur-md border border-cyan-500/30 p-2 rounded-sm">
+                <div className="bg-black/40 backdrop-blur-md border border-primary/30 p-2 rounded-sm">
                     <div className="flex items-center gap-2 mb-1">
-                        <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></span>
-                        <span className="text-[10px] text-cyan-400 font-mono tracking-widest">SCANNING LIVE</span>
+                        <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+                        <span className="text-[10px] text-primary font-mono tracking-widest">SCANNING LIVE</span>
                     </div>
                     <div className="text-[10px] text-white/60 font-mono space-y-0.5">
                         <div>PTS: {(Math.random() * 1000000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                         <div>ACC: ±0.025mm</div>
                         <div className="w-full h-0.5 bg-white/10 mt-1">
-                            <div className="h-full bg-cyan-500 w-[70%] animate-pulse"></div>
+                            <div className="h-full bg-primary w-[70%] animate-pulse"></div>
                         </div>
                     </div>
                 </div>

@@ -1,16 +1,20 @@
 import type { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Manrope, Space_Grotesk } from 'next/font/google'
 import './globals.css'
-import SmoothScroll from '@/components/SmoothScroll'
 import CustomCursor from '@/components/CustomCursor'
 import ScrollProgress from '@/components/ui/ScrollProgress'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
 
-const spaceGrotesk = Space_Grotesk({ 
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-manrope',
+})
+
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-space-grotesk',
@@ -28,12 +32,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
-        <SmoothScroll>
-          <CustomCursor />
-          <ScrollProgress />
-          {children}
-        </SmoothScroll>
+      <body className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+        <CustomCursor />
+        <ScrollProgress />
+        {children}
       </body>
     </html>
   )
