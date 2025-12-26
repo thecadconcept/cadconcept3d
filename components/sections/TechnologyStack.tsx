@@ -53,7 +53,7 @@ export default function TechnologyStack() {
               {duplicatedTechs.map((tech, index) => (
                 <motion.div
                   key={index}
-                  className="flex-shrink-0 px-8 py-4 border border-electric-blue/30 bg-background/50 backdrop-blur-sm text-2xl font-bold uppercase tracking-wider text-electric-blue whitespace-nowrap"
+                  className="flex-shrink-0 px-8 py-4 border border-primary/30 bg-background/50 backdrop-blur-sm text-2xl font-bold uppercase tracking-wider text-primary whitespace-nowrap"
                   whileHover={{ scale: 1.1, borderColor: '#00E5FF' }}
                   transition={{ duration: 0.3 }}
                 >

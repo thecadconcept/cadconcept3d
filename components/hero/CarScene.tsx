@@ -1,5 +1,3 @@
-'use client'
-
 import { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, ContactShadows, OrbitControls, Stars, Sparkles } from '@react-three/drei'
@@ -9,17 +7,11 @@ import CarModel from './CarModel'
 import { Html } from '@react-three/drei'
 import * as THREE from 'three'
 
-
-
-
 function DriftingGrid() {
     const gridRef = useRef<THREE.GridHelper>(null)
     useFrame((state) => {
         if (gridRef.current) {
-            // "slite moves to the right" -> slowly increment X
-            // Speed 0.2 is subtle
             gridRef.current.position.x = (state.clock.elapsedTime * 0.2) % 5
-            // Add a tiny bit of Z movement for 3D feel
             gridRef.current.position.z = (state.clock.elapsedTime * 0.05) % 5
         }
     })
@@ -27,26 +19,36 @@ function DriftingGrid() {
 }
 
 export default function CarScene() {
-    const [dpr, setDpr] = useState(1.5)
+    const [dpr, setDpr] = useState(1)
+    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
         const pixelRatio = window.devicePixelRatio
-        setDpr(Math.min(pixelRatio, 2))
+        setDpr(Math.min(pixelRatio, 1.5)) // Cap DPR at 1.5 for performance
+        setIsMobile(window.innerWidth < 768)
     }, [])
 
     return (
         <Canvas
             dpr={dpr}
             camera={{ position: [0, 0, 12], fov: 35 }}
-            gl={{ antialias: true, alpha: true, toneMapping: THREE.ReinhardToneMapping, toneMappingExposure: 1.5 }}
+            gl={{
+                antialias: !isMobile, // Disable AA on mobile
+                alpha: true,
+                toneMapping: THREE.ReinhardToneMapping,
+                toneMappingExposure: 1.5,
+                powerPreference: "high-performance"
+            }}
             className="w-full h-full"
-            shadows
+            shadows={!isMobile} // Disable shadows on mobile
         >
             <Suspense fallback={<Html center><Loader /></Html>}>
 
                 <color attach="background" args={['#020202']} />
 
-                <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
+                {!isMobile && (
+                    <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} />
+                )}
 
                 <ambientLight intensity={0.2} />
 
@@ -55,8 +57,8 @@ export default function CarScene() {
                     angle={0.2}
                     penumbra={1}
                     intensity={5}
-                    castShadow
-                    shadow-mapSize={[2048, 2048]}
+                    castShadow={!isMobile}
+                    shadow-mapSize={[1024, 1024]} // Reduced shadow map size
                     color="#ffffff"
                 />
 
@@ -65,11 +67,10 @@ export default function CarScene() {
 
                 <Environment preset="city" blur={0.8} />
 
-                {/* Floating Particles for "Enhanced Visual Appeal" */}
                 <Sparkles
-                    count={150}
+                    count={isMobile ? 50 : 100} // Reduce sparkles
                     scale={[30, 20, 20]}
-                    size={3}
+                    size={isMobile ? 2 : 3}
                     speed={0.4}
                     opacity={0.5}
                     color="#00E5FF"
@@ -79,13 +80,12 @@ export default function CarScene() {
 
                 <DriftingGrid />
 
-                <CarModel />
+                <CarModel isMobile={isMobile} />
 
                 <OrbitControls
                     enableZoom={false}
                     enablePan={false}
-                    // autoRotate // Disable autoRotate to focus on the linear movement
-                    // autoRotateSpeed={0.8}
+                    enableRotate={false} // Disable manual rotation to let scroll control take over
                     minPolarAngle={Math.PI / 3}
                     maxPolarAngle={Math.PI / 1.5}
                 />

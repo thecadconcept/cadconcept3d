@@ -17,7 +17,7 @@ export default function WhyChooseUs() {
   return (
     <section
       ref={ref}
-      className="relative py-32 bg-black/[0.96] overflow-hidden"
+      className="relative py-32 bg-background overflow-hidden"
     >
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
@@ -68,7 +68,7 @@ function StatCard({ stat, isInView, index }: { stat: any, isInView: boolean, ind
       </div>
 
       <h3 className="text-xl text-primary/80 font-medium mb-2">{stat.label}</h3>
-      <p className="text-gray-400 text-sm leading-relaxed">{stat.desc}</p>
+      <p className="text-muted text-sm leading-relaxed">{stat.desc}</p>
     </motion.div>
   )
 }

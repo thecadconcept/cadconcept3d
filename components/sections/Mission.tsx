@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Container from '@/components/ui/Container'
+import CountUp from '@/components/ui/CountUp'
 
 export default function Mission() {
     return (
@@ -47,15 +48,21 @@ export default function Mission() {
                         >
                             <div className="flex gap-8 mt-8 text-sm font-mono text-gray-500">
                                 <div>
-                                    <span className="block text-white text-2xl font-bold">01</span>
+                                    <span className="block text-white text-2xl font-bold">
+                                        <CountUp to={1} pad={2} className="inline-block" />
+                                    </span>
                                     <span>DESIGN</span>
                                 </div>
                                 <div>
-                                    <span className="block text-white text-2xl font-bold">02</span>
+                                    <span className="block text-white text-2xl font-bold">
+                                        <CountUp to={2} pad={2} className="inline-block" />
+                                    </span>
                                     <span>ENGINEER</span>
                                 </div>
                                 <div>
-                                    <span className="block text-white text-2xl font-bold">03</span>
+                                    <span className="block text-white text-2xl font-bold">
+                                        <CountUp to={3} pad={2} className="inline-block" />
+                                    </span>
                                     <span>BUILD</span>
                                 </div>
                             </div>
@@ -63,28 +70,34 @@ export default function Mission() {
                     </div>
 
                     {/* Right: 3D Visual */}
-                    <div className="relative h-[50vh] lg:h-[70vh] w-full rounded-2xl overflow-hidden border border-white/5 bg-white/5 backdrop-blur-sm shadow-2xl">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-transparent z-10 pointer-events-none" />
+                    <div className="relative h-[50vh] lg:h-[70vh] w-full rounded-2xl overflow-hidden border border-white/10 bg-black/20 backdrop-blur-sm shadow-2xl group">
+
+                        {/* Glow effect */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000" />
+
+                        <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-transparent z-10 pointer-events-none" />
+
                         <video
-                            className="w-full h-full object-cover"
+                            className="relative w-full h-full object-cover z-0"
                             autoPlay
                             loop
                             muted
                             playsInline
-                            poster="/images/mission-placeholder.jpg"
+                        // poster="/images/mission-placeholder.jpg"
                         >
                             <source src="/Video/reverse-engineering.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
 
                         {/* Decorative Corner Text */}
-                        <div className="absolute bottom-4 right-4 z-20 font-mono text-[10px] text-primary/50">
+                        <div className="absolute bottom-6 right-6 z-20 font-mono text-xs text-primary/70 tracking-widest flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                             FIG 2.4 - HULL_GEO
                         </div>
                     </div>
 
                 </div>
             </Container>
-        </section >
+        </section>
     )
 }

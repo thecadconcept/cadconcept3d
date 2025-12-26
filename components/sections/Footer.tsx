@@ -7,11 +7,7 @@ import { Button } from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import InstagramFeed from './InstagramFeed'
 
-const socialLinks = [
-  { name: 'LinkedIn', icon: 'in', href: '#' },
-  { name: 'Twitter', icon: 'tw', href: '#' },
-  { name: 'Email', icon: '@', href: 'mailto:thecadconcept3d@gmail.com' },
-]
+
 
 const quickLinks = [
   { name: 'About Us', href: '#about' },
@@ -90,7 +86,7 @@ export default function Footer() {
               manufacturing excellence.
             </p>
             <MagneticButton>
-              <Button variant="primary" className="rounded-full shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+              <Button variant="primary" className="rounded-full shadow-glow">
                 Get Started
               </Button>
             </MagneticButton>
@@ -161,29 +157,6 @@ export default function Footer() {
               </li>
             </ul>
 
-            <div>
-              <h5 className="font-heading text-sm font-bold uppercase tracking-wide mb-4 text-primary">
-                Follow Us
-              </h5>
-              <div className="flex gap-3">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.href}
-                    className="w-12 h-12 rounded-full border border-primary/30 bg-background/50 backdrop-blur-sm flex items-center justify-center text-primary hover:border-primary hover:bg-primary/10 transition-all group"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                  >
-                    <span className="text-sm font-bold group-hover:scale-110 transition-transform">
-                      {social.icon}
-                    </span>
-                  </motion.a>
-                ))}
-              </div>
-            </div>
           </motion.div>
         </motion.div>
 

@@ -1,11 +1,18 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import CarScene from './CarScene'
+import dynamic from 'next/dynamic'
 import Container from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
 import MagneticButton from '@/components/ui/MagneticButton'
 import TypewriterText from '@/components/ui/TypewriterText'
+import Loader from '@/components/ui/Loader'
+
+// Lazy load the heavy 3D scene
+const CarScene = dynamic(() => import('./CarScene'), {
+    ssr: false,
+    loading: () => <div className="w-full h-full flex items-center justify-center bg-black/90"><Loader /></div>
+})
 
 export default function CarHero() {
 
@@ -26,18 +33,8 @@ export default function CarHero() {
         <section id="home" className="relative w-full h-screen bg-background overflow-hidden">
 
             {/* 3D Scene Layer */}
-            {/* Video Background Layer */}
             <div className="absolute inset-0 z-0">
                 <CarScene />
-                {/* <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover opacity-60"
-                >
-                    <source src="/Video/reverse-engineering.mp4" type="video/mp4" />
-                </video> */}
             </div>
 
             {/* Cinematic Vignette Overlay */}
@@ -79,7 +76,7 @@ export default function CarHero() {
                             <MagneticButton>
                                 <Button
                                     size="lg"
-                                    className="shadow-[0_0_20px_rgba(0,229,255,0.4)] tracking-widest uppercase"
+                                    className="shadow-glow tracking-widest uppercase"
                                     onClick={scrollToContact}
                                 >
                                     Work With Us
