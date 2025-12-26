@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Manrope, Space_Grotesk } from 'next/font/google'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
 import ScrollProgress from '@/components/ui/ScrollProgress'
@@ -40,6 +41,7 @@ export default function RootLayout({
         <ScrollProgress />
         <WhatsAppButton />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   )
