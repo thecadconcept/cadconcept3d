@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import MagneticButton from '@/components/ui/MagneticButton'
 import { Button } from '@/components/ui/Button'
@@ -18,6 +18,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const isManualScroll = useRef(false)
 
   useEffect(() => {
     let ticking = false
@@ -25,22 +26,25 @@ export default function Header() {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const scrollPosition = window.scrollY + window.innerHeight * 0.4
-          let currentId = 'home'
+          // Only update active section via scroll if not manually scrolling
+          if (!isManualScroll.current) {
+            const scrollPosition = window.scrollY + window.innerHeight * 0.4
+            let currentId = 'home'
 
-          for (const item of navItems) {
-            const id = item.href.replace('#', '')
-            const element = document.getElementById(id)
-            if (element) {
-              const { offsetTop } = element
-              // Add a small buffer zone
-              if (scrollPosition >= offsetTop - 100) {
-                currentId = id
+            for (const item of navItems) {
+              const id = item.href.replace('#', '')
+              const element = document.getElementById(id)
+              if (element) {
+                const { offsetTop } = element
+                // Add a small buffer zone
+                if (scrollPosition >= offsetTop - 100) {
+                  currentId = id
+                }
               }
             }
+            setActiveSection(currentId)
           }
 
-          setActiveSection(currentId)
           setIsScrolled(window.scrollY > 20)
           ticking = false
         })
@@ -57,6 +61,12 @@ export default function Header() {
   const handleNavClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault()
     const targetId = href.replace('#', '')
+
+    // Update URL to reflect the "redirect"
+    window.history.pushState(null, '', href)
+
+    // Set manual scroll flag to prevent scroll listener interference
+    isManualScroll.current = true
     setActiveSection(targetId)
     setIsMobileMenuOpen(false)
 
@@ -65,10 +75,18 @@ export default function Header() {
       const offset = 80
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.pageYOffset - offset
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth',
       })
+
+      // Reset flag after scroll animation (approx 1000ms)
+      setTimeout(() => {
+        isManualScroll.current = false
+      }, 1000)
+    } else {
+      isManualScroll.current = false
     }
   }
 
