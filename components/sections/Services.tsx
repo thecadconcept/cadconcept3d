@@ -66,11 +66,7 @@ export default function Services() {
             id="services"
             className="relative py-24"
         >
-            {/* Background Elements */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-900/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-t from-cyan-900/10 to-transparent" />
-            </div>
+
 
             <Container className="relative z-10">
                 <motion.div

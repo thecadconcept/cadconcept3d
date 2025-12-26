@@ -5,6 +5,7 @@ import CarScene from './CarScene'
 import Container from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
 import MagneticButton from '@/components/ui/MagneticButton'
+import TypewriterText from '@/components/ui/TypewriterText'
 
 export default function CarHero() {
 
@@ -27,8 +28,8 @@ export default function CarHero() {
             {/* 3D Scene Layer */}
             {/* Video Background Layer */}
             <div className="absolute inset-0 z-0">
-                {/* <CarScene /> */}
-                <video
+                <CarScene />
+                {/* <video
                     autoPlay
                     loop
                     muted
@@ -36,7 +37,7 @@ export default function CarHero() {
                     className="w-full h-full object-cover opacity-60"
                 >
                     <source src="/Video/reverse-engineering.mp4" type="video/mp4" />
-                </video>
+                </video> */}
             </div>
 
             {/* Cinematic Vignette Overlay */}
@@ -67,7 +68,7 @@ export default function CarHero() {
                         <h1 className="text-6xl md:text-8xl font-bold font-heading text-white mb-6 leading-tight tracking-tight">
                             Engineering  <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-primary animate-gradient-x">
-                                Excellence
+                                <TypewriterText text="Excellence" delay={1000} speed={150} cursor={false} loop={true} />
                             </span>
                         </h1>
                         <p className="text-accent text-lg md:text-xl max-w-xl mb-10 leading-relaxed font-light">
@@ -90,7 +91,7 @@ export default function CarHero() {
             </Container>
 
             {/* Decorative Grid Lines */}
-
+            <div className="absolute bottom-10 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent z-10" />
             <div className="absolute top-32 right-0 w-1/3 h-px bg-gradient-to-l from-transparent via-primary/30 to-transparent z-10" />
 
         </section>

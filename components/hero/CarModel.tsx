@@ -29,39 +29,26 @@ export default function CarModel() {
 
     // Animation Loop
     useFrame((state) => {
+        const time = state.clock.getElapsedTime()
+
         if (materialRef.current) {
-            const time = state.clock.getElapsedTime()
             materialRef.current.uniforms.uTime.value = time
 
-            // Scan Motion: Top (4) to Bottom (-4)
-            // Cycle: 8 seconds
+            // Scan Motion (Keep existing)
             const duration = 8
             const cycle = time % duration
-
-            // We want a smooth sweep
-            // 0-4s: Sweep Down
-            // 4-8s: Reset / Hold (or Sweep Up? Let's Instant Reset for Loop feel)
-
-            // Linear sweep: 4 -> -4
             let scanY = 4.0 - (cycle / 4.0) * 8.0
-
             if (cycle > 4.0) {
-                // "Scanned" state (Show CAD)
-                // Just hold it at bottom for a bit, then reset high
-                scanY = -5.0
-
-                // Hard reset at end of cycle for effect? 
-                // Better: Scan UP for variety?
-                // Let's Scan UP: -4 -> 4
                 scanY = -4.0 + ((cycle - 4.0) / 4.0) * 8.0
             }
-
             materialRef.current.uniforms.uScanPos.value = scanY
         }
     })
 
+
+
     return (
-        <group position={[0, 0, 0]}>
+        <group position={[4, 0, 0]}>
             <Float speed={2} rotationIntensity={0.5} floatIntensity={0.2}>
                 <mesh castShadow receiveShadow rotation={[0.5, 0.5, 0]}>
                     {/* Complex Geometry to show off wireframe */}

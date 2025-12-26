@@ -73,7 +73,7 @@ export default function Mission() {
                             playsInline
                             poster="/images/mission-placeholder.jpg"
                         >
-                            <source src="/videos/reverse-engineering.mp4" type="video/mp4" />
+                            <source src="/Video/reverse-engineering.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
 

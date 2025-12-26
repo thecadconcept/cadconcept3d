@@ -4,6 +4,7 @@ import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
 import ScrollProgress from '@/components/ui/ScrollProgress'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
+import Preloader from '@/components/ui/Preloader'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <CustomCursor />
+        <Preloader />
         <ScrollProgress />
         <WhatsAppButton />
         {children}
