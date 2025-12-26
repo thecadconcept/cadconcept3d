@@ -91,6 +91,7 @@ export default function InstagramFeed({ username }: InstagramFeedProps) {
                         <div className="w-full h-full bg-black rounded-full p-1">
                             <div className="w-full h-full rounded-full bg-white/10 flex items-center justify-center font-bold text-xl text-white overflow-hidden">
                                 {profile?.profile_picture_url ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
                                     <img src={profile.profile_picture_url} alt={username} className="w-full h-full object-cover" />
                                 ) : (
                                     <span>{username.slice(0, 2).toUpperCase()}</span>
@@ -148,6 +149,7 @@ export default function InstagramFeed({ username }: InstagramFeedProps) {
                             onClick={() => window.open(post.permalink, '_blank')}
                         >
                             {post.media_url ? (
+                                // eslint-disable-next-line @next/next/no-img-element
                                 <img src={post.media_url} alt="Instagram Post" className="w-full h-full object-cover" />
                             ) : (
                                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-30 group-hover:opacity-50 transition-opacity" />

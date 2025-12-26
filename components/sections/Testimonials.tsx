@@ -137,7 +137,7 @@ export default function Testimonials() {
                             <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 text-center shadow-xl">
                                 {/* Quote Icon */}
                                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-secondary text-2xl font-serif">
-                                    "
+                                    &quot;
                                 </div>
 
                                 <p className="text-lg md:text-2xl text-white font-light leading-relaxed mb-8 mt-4">
