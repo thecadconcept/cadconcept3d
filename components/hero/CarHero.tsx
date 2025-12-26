@@ -25,8 +25,18 @@ export default function CarHero() {
         <section id="home" className="relative w-full h-screen bg-background overflow-hidden">
 
             {/* 3D Scene Layer */}
+            {/* Video Background Layer */}
             <div className="absolute inset-0 z-0">
-                <CarScene />
+                {/* <CarScene /> */}
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover opacity-60"
+                >
+                    <source src="/Video/reverse-engineering.mp4" type="video/mp4" />
+                </video>
             </div>
 
             {/* Cinematic Vignette Overlay */}
@@ -80,7 +90,7 @@ export default function CarHero() {
             </Container>
 
             {/* Decorative Grid Lines */}
-            <div className="absolute bottom-10 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent z-10" />
+
             <div className="absolute top-32 right-0 w-1/3 h-px bg-gradient-to-l from-transparent via-primary/30 to-transparent z-10" />
 
         </section>

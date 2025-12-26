@@ -3,6 +3,7 @@ import { Inter, Manrope, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
 import ScrollProgress from '@/components/ui/ScrollProgress'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <CustomCursor />
         <ScrollProgress />
+        <WhatsAppButton />
         {children}
       </body>
     </html>

@@ -12,6 +12,26 @@
     overflow-x: hidden;
   }
 
+  /* Apply user-select: none to everything */
+  *,
+  *::before,
+  *::after {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  /* Re-enable for inputs and text content that SHOULD be selectable */
+  input,
+  textarea,
+  [contenteditable="true"] {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+  }
+
   body {
     @apply bg-background text-soft-white font-sans;
     overflow-x: hidden;
@@ -19,7 +39,12 @@
   }
 
   /* Typography Defaults */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading tracking-tight;
   }
 }
@@ -40,7 +65,7 @@
   .glow-effect-strong {
     box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
   }
-  
+
   /* Utility for keeping content centered */
   .content-container {
     @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
