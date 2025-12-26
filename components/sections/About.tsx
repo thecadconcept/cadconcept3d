@@ -47,9 +47,9 @@ export default function About() {
           {/* Left: Visual (Blueprint SVG) - Wrapped in Glass Card */}
           <motion.div
             variants={itemVariants}
-            className="relative h-[300px] md:h-[400px] w-full rounded-2xl overflow-hidden border border-white/5 bg-white/5 backdrop-blur-sm shadow-2xl flex items-center justify-center p-6 md:p-8 order-1"
+            className="relative h-[300px] md:h-[400px] w-full rounded-2xl overflow-hidden border border-white/10 bg-surface-50/5 backdrop-blur-sm shadow-2xl flex items-center justify-center p-6 md:p-8 order-1"
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-background via-transparent to-transparent z-10 pointer-events-none" />
             <BlueprintSVG />
 
             {/* Decorative Corner Text */}
@@ -67,13 +67,13 @@ export default function About() {
               <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold font-heading text-white leading-tight">
                 Precision. <br />
                 Passion. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-info">
                   Perfection.
                 </span>
               </h2>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="space-y-6 text-gray-400 text-base md:text-lg font-light leading-relaxed border-l-2 border-primary/30 pl-6">
+            <motion.div variants={itemVariants} className="space-y-6 text-muted text-base md:text-lg font-light leading-relaxed border-l-2 border-primary/30 pl-6">
               <p>
                 At <b>CAD CONCEPT 3D</b>, we combine accuracy, innovation, and engineering excellence to transform real-world components into high-fidelity digital models and manufacturing-ready solutions.
               </p>

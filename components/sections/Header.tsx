@@ -137,13 +137,13 @@ export default function Header() {
                     <motion.a
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.href)}
-                      className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors duration-300 block ${isActive ? 'text-black' : 'text-zinc-400 hover:text-white'
+                      className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors duration-300 block ${isActive ? 'text-black' : 'text-muted hover:text-white'
                         }`}
                     >
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
-                          className="absolute inset-0 bg-primary rounded-full shadow-[0_0_10px_rgba(0,229,255,0.3)]"
+                          className="absolute inset-0 bg-primary rounded-full shadow-glow"
                           transition={{
                             type: "spring",
                             stiffness: 380,
@@ -175,7 +175,7 @@ export default function Header() {
 
               {/* Mobile Menu Toggle */}
               <button
-                className="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors"
+                className="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMobileMenuOpen}
@@ -226,7 +226,7 @@ export default function Header() {
                       onClick={(e) => handleNavClick(e, item.href)}
                       className={`block text-3xl font-heading font-bold text-center py-2 transition-colors duration-300 ${activeSection === item.href.replace('#', '')
                         ? 'text-primary'
-                        : 'text-zinc-500 hover:text-white'
+                        : 'text-muted hover:text-white'
                         }`}
                     >
                       {item.name}
@@ -245,7 +245,7 @@ export default function Header() {
                 <Button
                   variant="primary"
                   size="lg"
-                  className="rounded-full shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.6)]"
+                  className="rounded-full shadow-glow hover:shadow-glow-strong"
                 >
                   Start Project
                 </Button>

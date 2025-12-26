@@ -142,7 +142,7 @@ export default function Contact() {
                     <h4 className="text-sm uppercase tracking-wide text-primary mb-1 font-medium">
                       {info.label}
                     </h4>
-                    <p className="text-lg text-soft-white group-hover:text-primary transition-colors">
+                    <p className="text-lg text-foreground group-hover:text-primary transition-colors">
                       {info.value}
                     </p>
                   </div>
@@ -191,7 +191,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-background/80 border border-primary/30 text-soft-white placeholder-accent/50 focus:outline-none focus:border-primary transition-all rounded-md"
+                  className="w-full px-4 py-3 bg-secondary-900/80 border border-primary/30 text-foreground placeholder-muted focus:outline-none focus:border-primary transition-all rounded-md"
                   placeholder="John Doe"
                 />
               </div>
@@ -210,7 +210,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-background/80 border border-primary/30 text-soft-white placeholder-accent/50 focus:outline-none focus:border-primary transition-all rounded-md"
+                  className="w-full px-4 py-3 bg-secondary-900/80 border border-primary/30 text-foreground placeholder-muted focus:outline-none focus:border-primary transition-all rounded-md"
                   placeholder="john@example.com"
                 />
               </div>
@@ -228,7 +228,7 @@ export default function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-background/80 border border-primary/30 text-soft-white placeholder-accent/50 focus:outline-none focus:border-primary transition-all rounded-md"
+                  className="w-full px-4 py-3 bg-secondary-900/80 border border-primary/30 text-foreground placeholder-muted focus:outline-none focus:border-primary transition-all rounded-md"
                   placeholder="+1 (555) 123-4567"
                 />
               </div>
@@ -247,7 +247,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-background/80 border border-primary/30 text-soft-white placeholder-accent/50 focus:outline-none focus:border-primary transition-all resize-none rounded-md"
+                  className="w-full px-4 py-3 bg-secondary-900/80 border border-primary/30 text-foreground placeholder-muted focus:outline-none focus:border-primary transition-all resize-none rounded-md"
                   placeholder="Tell us about your project..."
                 />
               </div>
@@ -256,7 +256,7 @@ export default function Contact() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full shadow-[0_0_20px_rgba(0,229,255,0.4)]"
+                  className="w-full shadow-glow"
                   variant='primary'
                   size='lg'
                 >

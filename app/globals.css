@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-gray-800 box-border;
+  :root {
+    --background: 5 5 5;
+    --foreground: 237 237 237;
   }
 
   html {
@@ -12,40 +13,52 @@
     overflow-x: hidden;
   }
 
-  /* Apply user-select: none to everything */
-  *,
-  *::before,
-  *::after {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+  /* Improved Selection Style */
+  ::selection {
+    @apply bg-primary/30 text-primary-50;
   }
 
-  /* Re-enable for inputs and text content that SHOULD be selectable */
-  input,
-  textarea,
-  [contenteditable="true"] {
-    user-select: text;
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-  }
-
+  /* Base Typography */
   body {
-    @apply bg-background text-soft-white font-sans;
+    @apply bg-background text-foreground font-sans antialiased select-none;
+    /* Disable selection globally */
     overflow-x: hidden;
     overflow-y: auto;
   }
 
-  /* Typography Defaults */
+  /* Allow selection in inputs */
+  input,
+  textarea {
+    @apply select-text;
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-heading tracking-tight;
+    @apply font-heading tracking-tight text-white;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-semibold;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-medium;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-medium;
+  }
+
+  p {
+    @apply leading-relaxed text-gray-300;
   }
 }
 
@@ -55,18 +68,22 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent;
   }
 
-  .glow-effect {
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  .gradient-border-bottom {
+    @apply border-b border-white/10 relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full;
   }
 
-  .glow-effect-strong {
-    box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
+  /* Glassmorphism Utilities */
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
   }
 
-  /* Utility for keeping content centered */
+  .glass-card {
+    @apply glass rounded-xl shadow-lg hover:shadow-glow transition-all duration-300;
+  }
+
   .content-container {
     @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
@@ -74,33 +91,26 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: theme('colors.secondary.950');
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00E5FF;
-  border-radius: 4px;
+  background: theme('colors.primary.700');
+  border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00B8CC;
+  background: theme('colors.primary.500');
 }
 
 /* Grid background pattern */
 .grid-pattern {
   background-image:
-    linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-/* Prevent layout shift */
-img,
-video {
-  max-width: 100%;
-  height: auto;
+    linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
