@@ -7,7 +7,6 @@ import ScrollProgress from '@/components/ui/ScrollProgress'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import Preloader from '@/components/ui/Preloader'
 import ContentProtection from '@/components/ContentProtection'
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({
   subsets: ['latin'],
@@ -38,7 +37,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
-        <SpeedInsights />
         <ContentProtection />
         <CustomCursor />
         <Preloader />
