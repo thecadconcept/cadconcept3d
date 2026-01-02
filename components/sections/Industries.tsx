@@ -79,7 +79,7 @@ export default function Industries() {
     <section
       ref={ref}
       id="industries"
-      className="relative py-24"
+      className="relative py-10 md:py-16"
     >
       {/* Background Elements (Mirrors Services) */}
       <div className="absolute inset-0 z-0 pointer-events-none">

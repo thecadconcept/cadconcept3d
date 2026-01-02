@@ -36,16 +36,32 @@ export default function Contact() {
     phone: '',
     message: '',
   })
+  const [file, setFile] = useState<File | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+
+    // Create FormData object for submission (simulation)
+    const data = new FormData()
+    data.append('name', formData.name)
+    data.append('email', formData.email)
+    data.append('phone', formData.phone)
+    data.append('message', formData.message)
+    if (file) {
+      data.append('file', file)
+    }
+
+    console.log('Submitting Form:', Object.fromEntries(data.entries()))
+    if (file) console.log('File:', file.name)
+
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false)
       alert('Thank you for your message! We will get back to you soon.')
       setFormData({ name: '', email: '', phone: '', message: '' })
+      setFile(null)
     }, 1000)
   }
 
@@ -56,6 +72,12 @@ export default function Contact() {
       ...formData,
       [e.target.name]: e.target.value,
     })
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0])
+    }
   }
 
   const containerVariants = {
@@ -84,7 +106,7 @@ export default function Contact() {
     <section
       ref={ref}
       id="contact"
-      className="relative min-h-screen py-32 overflow-hidden"
+      className="relative min-h-screen py-16 md:py-24 overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
@@ -231,6 +253,41 @@ export default function Contact() {
                   className="w-full px-4 py-3 bg-secondary-900/80 border border-primary/30 text-foreground placeholder-muted focus:outline-none focus:border-primary transition-all rounded-md"
                   placeholder="+1 (555) 123-4567"
                 />
+              </div>
+
+              <div className="grid grid-cols-1 gap-2">
+                <label
+                  htmlFor="file"
+                  className="block text-sm uppercase tracking-wide text-primary mb-2 font-medium"
+                >
+                  Project File (Optional)
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    onChange={handleFileChange}
+                    className="hidden" // Hiding the default input
+                  />
+                  <label
+                    htmlFor="file"
+                    className="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-primary/30 rounded-md cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center p-4"
+                  >
+                    {file ? (
+                      <div className="flex items-center gap-2 text-primary">
+                        <span className="text-xl">📄</span>
+                        <span className="text-sm font-medium truncate max-w-[200px]">{file.name}</span>
+                        <span className="text-xs text-accent">({(file.size / 1024).toFixed(1)} KB)</span>
+                      </div>
+                    ) : (
+                      <>
+                        <span className="text-2xl mb-1 text-primary/50">📂</span>
+                        <span className="text-sm text-accent">Click to upload CAD files or documents</span>
+                      </>
+                    )}
+                  </label>
+                </div>
               </div>
 
               <div>

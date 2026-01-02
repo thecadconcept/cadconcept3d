@@ -8,11 +8,7 @@ import MagneticButton from '@/components/ui/MagneticButton'
 import TypewriterText from '@/components/ui/TypewriterText'
 import Loader from '@/components/ui/Loader'
 
-// Lazy load the heavy 3D scene
-const CarScene = dynamic(() => import('./CarScene'), {
-    ssr: false,
-    loading: () => <div className="w-full h-full flex items-center justify-center bg-black/90"><Loader /></div>
-})
+import Hero3D from './Hero3d'
 
 export default function CarHero() {
 
@@ -33,9 +29,7 @@ export default function CarHero() {
         <section id="home" className="relative w-full h-screen bg-background overflow-hidden">
 
             {/* 3D Scene Layer */}
-            <div className="absolute inset-0 z-0">
-                <CarScene />
-            </div>
+            <Hero3D />
 
             {/* Cinematic Vignette Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background pointer-events-none z-10 opacity-80" />

@@ -35,7 +35,7 @@ export default function About() {
     <section
       ref={ref}
       id="about"
-      className="relative py-16 md:py-24 bg-background overflow-hidden"
+      className="relative py-8 md:py-16 bg-background overflow-hidden"
     >
       <Container>
         <motion.div
