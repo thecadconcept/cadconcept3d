@@ -48,7 +48,7 @@ export default function Footer() {
         <div className="absolute inset-0 grid-pattern" />
       </div>
 
-      <Container className="relative py-20">
+      <Container className="relative py-12">
         {/* Instagram Feed */}
         <InstagramFeed username="CADConcept3D" />
 
@@ -86,7 +86,11 @@ export default function Footer() {
               manufacturing excellence.
             </p>
             <MagneticButton>
-              <Button variant="primary" className="rounded-full shadow-glow">
+              <Button
+                variant="primary"
+                className="rounded-full shadow-glow"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 Get Started
               </Button>
             </MagneticButton>

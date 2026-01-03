@@ -28,53 +28,66 @@ export default function InstagramFeed({ username }: InstagramFeedProps) {
     const [posts, setPosts] = useState<InstagramPost[]>([])
     const [profile, setProfile] = useState<InstagramProfile | null>(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null)
 
-    // NOTE: In a real production app, you would fetch this from your backend
-    // which holds the long-lived access token.
-    // For this demo, we'll simulate the data fetching structure.
+    // Fallback Mock Data
+    const mockProfile = {
+        username: username,
+        posts_count: 124,
+        followers_count: 5300,
+        following_count: 1200,
+        profile_picture_url: ''
+    }
+
+    const mockPosts: InstagramPost[] = [
+        { id: '1', media_url: '', permalink: '#', media_type: 'IMAGE' },
+        { id: '2', media_url: '', permalink: '#', media_type: 'IMAGE' },
+        { id: '3', media_url: '', permalink: '#', media_type: 'IMAGE' },
+        { id: '4', media_url: '', permalink: '#', media_type: 'IMAGE' },
+        { id: '5', media_url: '', permalink: '#', media_type: 'IMAGE' },
+        { id: '6', media_url: '', permalink: '#', media_type: 'IMAGE' },
+    ]
 
     useEffect(() => {
         const fetchInstagramData = async () => {
             setIsLoading(true)
             try {
-                // SIMULATED API CALL
-                // In reality: const res = await fetch(`/api/instagram?username=${username}`)
+                // Fetch from our local API route
+                const res = await fetch('/api/instagram')
 
-                await new Promise(resolve => setTimeout(resolve, 1000)) // Fake delay
+                if (res.status === 503) {
+                    console.info('Instagram Token missing, using mock data.')
+                    setProfile(mockProfile)
+                    setPosts(mockPosts)
+                    return
+                }
 
-                // Mock Data reflecting the structure we'd get from the Graph API
+                if (!res.ok) throw new Error('Failed to fetch from API')
+
+                const data = await res.json()
+
+                // Use API data, fill missing profile stats with mocks (since Basic API is limited)
+                setPosts(data.posts || mockPosts)
                 setProfile({
-                    username: username,
-                    posts_count: 124,
-                    followers_count: 5300,
-                    following_count: 1200,
-                    profile_picture_url: '' // We'll use the gradient placeholder if empty
+                    ...mockProfile,
+                    username: data.profile?.username || username,
+                    // Keep mock stats as Basic API doesn't return followers
+                    followers_count: mockProfile.followers_count,
+                    following_count: mockProfile.following_count
                 })
 
-                setPosts([
-                    { id: '1', media_url: '', permalink: '#', media_type: 'IMAGE' },
-                    { id: '2', media_url: '', permalink: '#', media_type: 'IMAGE' },
-                    { id: '3', media_url: '', permalink: '#', media_type: 'IMAGE' },
-                    { id: '4', media_url: '', permalink: '#', media_type: 'IMAGE' },
-                    { id: '5', media_url: '', permalink: '#', media_type: 'IMAGE' },
-                    { id: '6', media_url: '', permalink: '#', media_type: 'IMAGE' },
-                ])
-
             } catch (err) {
-                setError('Failed to load Instagram feed')
-                console.error(err)
+                console.error('Instagram Loader Error:', err)
+                // Fallback to mock on error
+                setProfile(mockProfile)
+                setPosts(mockPosts)
             } finally {
                 setIsLoading(false)
             }
         }
 
-        if (username) {
-            fetchInstagramData()
-        }
-    }, [username])
-
-    if (error) return null
+        fetchInstagramData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <motion.div
@@ -150,7 +163,7 @@ export default function InstagramFeed({ username }: InstagramFeedProps) {
                         >
                             {post.media_url ? (
                                 // eslint-disable-next-line @next/next/no-img-element
-                                <img src={post.media_url} alt="Instagram Post" className="w-full h-full object-cover" />
+                                <img src={post.media_url} alt={post.caption || "Instagram Post"} className="w-full h-full object-cover" />
                             ) : (
                                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-30 group-hover:opacity-50 transition-opacity" />
                             )}
