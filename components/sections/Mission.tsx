@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Container from '@/components/ui/Container'
 import CountUp from '@/components/ui/CountUp'
+import Image from 'next/image'
 
 export default function Mission() {
     return (
@@ -10,16 +11,13 @@ export default function Mission() {
 
             {/* Background Video Layer */}
             <div className="absolute inset-0 z-0">
-                <video
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                >
-                    <source src="/Video/reverse-engineering.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+                <Image
+                    src="/images/mission-bg.png"
+                    alt="Mission Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
                 {/* Overlay for readability */}
                 <div className="absolute inset-0 bg-black/70 z-10" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background via-black/50 to-transparent z-10" />
@@ -67,21 +65,21 @@ export default function Mission() {
                             <div className="flex gap-8 mt-8 text-sm font-mono text-gray-400">
                                 <div>
                                     <span className="block text-white text-2xl font-bold">
-                                        <CountUp to={1} pad={2} className="inline-block" />
+                                        <CountUp to={250} suffix="+" pad={0} delay={0.6} className="inline-block" />
                                     </span>
-                                    <span>DESIGN</span>
+                                    <span>CLIENTS</span>
                                 </div>
                                 <div>
                                     <span className="block text-white text-2xl font-bold">
-                                        <CountUp to={2} pad={2} className="inline-block" />
+                                        <CountUp to={7} pad={0} delay={0.8} className="inline-block" />
                                     </span>
-                                    <span>ENGINEER</span>
+                                    <span>YEARS</span>
                                 </div>
                                 <div>
                                     <span className="block text-white text-2xl font-bold">
-                                        <CountUp to={3} pad={2} className="inline-block" />
+                                        <CountUp to={2500} suffix="+" pad={0} delay={1.0} className="inline-block" />
                                     </span>
-                                    <span>BUILD</span>
+                                    <span>PROJECTS</span>
                                 </div>
                             </div>
                         </motion.div>

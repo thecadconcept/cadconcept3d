@@ -11,6 +11,7 @@ interface CountUpProps {
     prefix?: string
     suffix?: string
     pad?: number // Number of digits to zero-pad to
+    delay?: number // Delay in seconds before starting
 }
 
 export default function CountUp({
@@ -20,7 +21,8 @@ export default function CountUp({
     className = '',
     prefix = '',
     suffix = '',
-    pad = 0
+    pad = 0,
+    delay = 0
 }: CountUpProps) {
     const ref = useRef<HTMLSpanElement>(null)
     const motionValue = useMotionValue(from)
@@ -30,13 +32,16 @@ export default function CountUp({
         stiffness: 50,
         damping: 20
     })
-    const isInView = useInView(ref, { once: true, margin: "-50px" })
+    const isInView = useInView(ref, { once: true, margin: "-10px" }) // Reduced margin to ensure it's well within view
 
     useEffect(() => {
         if (isInView) {
-            motionValue.set(to)
+            const timeout = setTimeout(() => {
+                motionValue.set(to)
+            }, delay * 1000)
+            return () => clearTimeout(timeout)
         }
-    }, [isInView, motionValue, to])
+    }, [isInView, motionValue, to, delay])
 
     useEffect(() => {
         const unsubscribe = springValue.on("change", (latest) => {

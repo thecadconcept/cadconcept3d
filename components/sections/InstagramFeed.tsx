@@ -35,57 +35,62 @@ export default function InstagramFeed({ username }: InstagramFeedProps) {
         posts_count: 124,
         followers_count: 5300,
         following_count: 1200,
-        profile_picture_url: ''
+        profile_picture_url: '/logo.png'
     }
 
     const mockPosts: InstagramPost[] = [
-        { id: '1', media_url: '', permalink: '#', media_type: 'IMAGE' },
-        { id: '2', media_url: '', permalink: '#', media_type: 'IMAGE' },
-        { id: '3', media_url: '', permalink: '#', media_type: 'IMAGE' },
-        { id: '4', media_url: '', permalink: '#', media_type: 'IMAGE' },
-        { id: '5', media_url: '', permalink: '#', media_type: 'IMAGE' },
-        { id: '6', media_url: '', permalink: '#', media_type: 'IMAGE' },
+        { id: '1', media_url: '/images/instagram/insta_1_1769182515900.png', permalink: '#', media_type: 'IMAGE' },
+        { id: '2', media_url: '/images/instagram/insta_2_1769182536032.png', permalink: '#', media_type: 'IMAGE' },
+        { id: '3', media_url: '/images/instagram/insta_3_1769182551664.png', permalink: '#', media_type: 'IMAGE' },
+        { id: '4', media_url: '/images/instagram/insta_4_1769182568332.png', permalink: '#', media_type: 'IMAGE' },
+        { id: '5', media_url: '/images/instagram/insta_5_1769182585545.png', permalink: '#', media_type: 'IMAGE' },
+        { id: '6', media_url: '/images/instagram/insta_6_1769182602577.png', permalink: '#', media_type: 'IMAGE' },
     ]
 
     useEffect(() => {
-        const fetchInstagramData = async () => {
-            setIsLoading(true)
-            try {
-                // Fetch from our local API route
-                const res = await fetch('/api/instagram')
+        // Forcing mock data to display generated 3D render images
+        setProfile(mockProfile)
+        setPosts(mockPosts)
+        setIsLoading(false)
 
-                if (res.status === 503) {
-                    console.info('Instagram Token missing, using mock data.')
-                    setProfile(mockProfile)
-                    setPosts(mockPosts)
-                    return
-                }
-
-                if (!res.ok) throw new Error('Failed to fetch from API')
-
-                const data = await res.json()
-
-                // Use API data, fill missing profile stats with mocks (since Basic API is limited)
-                setPosts(data.posts || mockPosts)
-                setProfile({
-                    ...mockProfile,
-                    username: data.profile?.username || username,
-                    // Keep mock stats as Basic API doesn't return followers
-                    followers_count: mockProfile.followers_count,
-                    following_count: mockProfile.following_count
-                })
-
-            } catch (err) {
-                console.error('Instagram Loader Error:', err)
-                // Fallback to mock on error
-                setProfile(mockProfile)
-                setPosts(mockPosts)
-            } finally {
-                setIsLoading(false)
-            }
-        }
-
-        fetchInstagramData()
+        // const fetchInstagramData = async () => {
+        //     setIsLoading(true)
+        //     try {
+        //         // Fetch from our local API route
+        //         const res = await fetch('/api/instagram')
+        //
+        //         if (res.status === 503) {
+        //             console.info('Instagram Token missing, using mock data.')
+        //             setProfile(mockProfile)
+        //             setPosts(mockPosts)
+        //             return
+        //         }
+        //
+        //         if (!res.ok) throw new Error('Failed to fetch from API')
+        //
+        //         const data = await res.json()
+        //
+        //         // Use API data, fill missing profile stats with mocks (since Basic API is limited)
+        //         setPosts(data.posts || mockPosts)
+        //         setProfile({
+        //             ...mockProfile,
+        //             username: data.profile?.username || username,
+        //             // Keep mock stats as Basic API doesn't return followers
+        //             followers_count: mockProfile.followers_count,
+        //             following_count: mockProfile.following_count
+        //         })
+        //
+        //     } catch (err) {
+        //         console.error('Instagram Loader Error:', err)
+        //         // Fallback to mock on error
+        //         setProfile(mockProfile)
+        //         setPosts(mockPosts)
+        //     } finally {
+        //         setIsLoading(false)
+        //     }
+        // }
+        //
+        // fetchInstagramData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

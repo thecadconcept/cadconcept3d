@@ -6,6 +6,7 @@ import MagneticButton from '@/components/ui/MagneticButton'
 import { Button } from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import InstagramFeed from './InstagramFeed'
+import Image from 'next/image'
 
 
 
@@ -69,13 +70,19 @@ export default function Footer() {
               whileHover="hover"
             >
               <motion.div
-                className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/50 flex items-center justify-center overflow-hidden"
+                className="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center overflow-hidden"
                 variants={{
-                  hover: { rotate: 180, borderRadius: "50%" }
+                  hover: { scale: 1.1 }
                 }}
-                transition={{ duration: 0.6, ease: "backOut" }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="w-4 h-4 bg-primary rounded-sm transform rotate-45 group-hover:bg-white transition-colors duration-300" />
+                <Image
+                  src="/logo.png"
+                  alt="CAD Concept Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-contain"
+                />
               </motion.div>
               <h3 className="font-heading text-2xl font-bold tracking-tight text-white">
                 CAD<span className="text-primary">Concept</span> 3D
@@ -190,7 +197,7 @@ export default function Footer() {
           </div>
         </motion.div>
       </Container>
-    </footer>
+    </footer >
   )
 }
 
