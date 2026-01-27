@@ -5,7 +5,6 @@ import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
 import ScrollProgress from '@/components/ui/ScrollProgress'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
-import Preloader from '@/components/ui/Preloader'
 import ContentProtection from '@/components/ContentProtection'
 
 const inter = Inter({
@@ -27,6 +26,10 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: 'CAD Concept - Reverse Engineering & Scan to CAD Solutions',
   description: 'From Physical Part to Precision CAD Model. Professional 3D scanning, reverse engineering, and scan to CAD conversion services.',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({
@@ -39,7 +42,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <ContentProtection />
         <CustomCursor />
-        <Preloader />
         <ScrollProgress />
         <WhatsAppButton />
         {children}
