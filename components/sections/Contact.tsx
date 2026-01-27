@@ -5,6 +5,8 @@ import { motion, useInView } from 'framer-motion'
 import MagneticButton from '@/components/ui/MagneticButton'
 import { Button } from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import { ToastContainer, ToastType } from '@/components/ui/Toast'
+import PhoneInput from '@/components/ui/PhoneInput'
 
 const contactInfo = [
   {
@@ -27,6 +29,12 @@ const contactInfo = [
   },
 ]
 
+interface Toast {
+  id: string
+  message: string
+  type: ToastType
+}
+
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
@@ -38,31 +46,90 @@ export default function Contact() {
   })
   const [file, setFile] = useState<File | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [toasts, setToasts] = useState<Toast[]>([])
+
+  const showToast = (message: string, type: ToastType) => {
+    const id = Math.random().toString(36).substring(7)
+    setToasts((prev) => [...prev, { id, message, type }])
+  }
+
+  const removeToast = (id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id))
+  }
+
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '', // This will reset the PhoneInput component
+      message: '',
+    })
+    setFile(null)
+    // Reset file input
+    const fileInput = document.getElementById('file') as HTMLInputElement
+    if (fileInput) fileInput.value = ''
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Create FormData object for submission (simulation)
-    const data = new FormData()
-    data.append('name', formData.name)
-    data.append('email', formData.email)
-    data.append('phone', formData.phone)
-    data.append('message', formData.message)
-    if (file) {
-      data.append('file', file)
-    }
+    try {
+      // Create FormData object for submission
+      const data = new FormData()
+      data.append('name', formData.name)
+      data.append('email', formData.email)
+      data.append('phone', formData.phone)
+      data.append('message', formData.message)
+      if (file) {
+        data.append('file', file)
+      }
 
-    console.log('Submitting Form:', Object.fromEntries(data.entries()))
-    if (file) console.log('File:', file.name)
+      // Submit to PHP backend (Laragon server)
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost/cadconcept'
+      const response = await fetch(`${apiUrl}/api/contact-handler.php`, {
+        method: 'POST',
+        body: data,
+      })
 
-    // Simulate form submission
-    setTimeout(() => {
+      // Get response text first to check if it's valid JSON
+      const responseText = await response.text()
+
+      // Try to parse JSON
+      let result
+      try {
+        result = JSON.parse(responseText)
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError)
+        console.error('Response text:', responseText)
+        throw new Error('Invalid response from server')
+      }
+
+      // Check if response was successful (status 200-299)
+      if (response.ok && result.success) {
+        showToast(
+          result.message || 'Thank you for your message! We will get back to you soon.',
+          'success'
+        )
+        // Delay reset for smooth UX
+        setTimeout(() => {
+          resetForm()
+        }, 500)
+      } else {
+        showToast(
+          result.message || 'Failed to send message. Please try again.',
+          'error'
+        )
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      showToast(
+        'An error occurred while sending your message. Please try again later.',
+        'error'
+      )
+    } finally {
       setIsSubmitting(false)
-      alert('Thank you for your message! We will get back to you soon.')
-      setFormData({ name: '', email: '', phone: '', message: '' })
-      setFile(null)
-    }, 1000)
+    }
   }
 
   const handleChange = (
@@ -77,6 +144,8 @@ export default function Contact() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0])
+    } else {
+      setFile(null)
     }
   }
 
@@ -244,14 +313,10 @@ export default function Contact() {
                 >
                   Phone Number
                 </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
+                <PhoneInput
                   value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-secondary-900/80 border border-primary/30 text-foreground placeholder-muted focus:outline-none focus:border-primary transition-all rounded-md"
-                  placeholder="+1 (555) 123-4567"
+                  onChange={(value) => setFormData({ ...formData, phone: value })}
+                  placeholder="Enter phone number"
                 />
               </div>
 
@@ -313,17 +378,30 @@ export default function Contact() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full shadow-glow"
+                  className="w-full shadow-glow relative"
                   variant='primary'
                   size='lg'
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </span>
+                  ) : (
+                    'Send Message'
+                  )}
                 </Button>
               </MagneticButton>
             </form>
           </motion.div>
         </motion.div>
       </Container>
+
+      {/* Toast Notifications */}
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
     </section>
   )
 }
