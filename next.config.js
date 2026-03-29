@@ -1,14 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ['framer-motion'],
+  allowedDevOrigins: ['127.0.0.1', 'localhost'],
   images: {
-    domains: [
-      'scontent.cdninstagram.com',
-      'scontent-iad3-1.cdninstagram.com',
-      'scontent-lga3-1.cdninstagram.com',
-      'scontent-ort2-2.cdninstagram.com',
-      'instagram.com',
-    ],
     remotePatterns: [
       {
         protocol: 'https',

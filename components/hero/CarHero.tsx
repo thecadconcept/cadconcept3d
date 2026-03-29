@@ -6,9 +6,14 @@ import Container from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
 import MagneticButton from '@/components/ui/MagneticButton'
 import TypewriterText from '@/components/ui/TypewriterText'
-import Loader from '@/components/ui/Loader'
 
-import Hero3D from './Hero3d'
+// Pure Three.js — no @react-three/fiber dependency, React 19 compatible
+const Hero3D = dynamic(() => import('./Hero3d'), {
+    ssr: false,
+    loading: () => (
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_75%_35%,rgba(0,229,255,0.12),transparent_38%),radial-gradient(circle_at_62%_55%,rgba(255,102,0,0.08),transparent_28%)]" />
+    ),
+})
 
 export default function CarHero() {
 

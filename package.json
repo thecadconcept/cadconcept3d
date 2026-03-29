@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:prod": "next build && next export",
-    "start": "next start",
+    "dev": "next dev --webpack",
+    "prebuild": "node -e \"const fs=require('fs');try{fs.rmSync('.next',{recursive:true,force:true})}catch(e){}\"",
+    "build": "next build --webpack",
+    "start": "next start --webpack",
     "lint": "next lint"
   },
   "dependencies": {
@@ -15,7 +15,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^10.16.16",
     "gsap": "^3.12.2",
-    "next": "^14.2.35",
+    "next": "^16.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^3.4.0",
@@ -28,8 +28,8 @@
     "@types/react-dom": "^18",
     "@types/three": "^0.160.0",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "eslint": "^10.1.0",
+    "eslint-config-next": "^16.2.1",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"

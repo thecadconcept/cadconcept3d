@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+Sitemap: https://cadconcept3d.com/sitemap.xml
+Host: https://cadconcept3d.com

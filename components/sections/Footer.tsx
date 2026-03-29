@@ -2,10 +2,10 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Link from 'next/link'
 import MagneticButton from '@/components/ui/MagneticButton'
 import { Button } from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
-import InstagramFeed from './InstagramFeed'
 import Image from 'next/image'
 
 
@@ -50,9 +50,6 @@ export default function Footer() {
       </div>
 
       <Container className="relative py-12">
-        {/* Instagram Feed */}
-        <InstagramFeed username="CADConcept3D" />
-
         <motion.div
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12"
           initial={{ opacity: 0, y: 30 }}
@@ -188,12 +185,12 @@ export default function Footer() {
         >
           <p>© {new Date().getFullYear()} CAD Concept. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-primary transition-colors">
+            <Link href="/privacy-policy" className="hover:text-primary transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
+            </Link>
+            <Link href="/terms-of-service" className="hover:text-primary transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </motion.div>
       </Container>
