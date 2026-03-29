@@ -4,6 +4,7 @@ const nextConfig = {
   transpilePackages: ['framer-motion'],
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
