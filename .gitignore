@@ -9,7 +9,8 @@
 /coverage
 
 # next.js — .next is intentionally committed so the server doesn't need to build
-# /next/
+# only the webpack cache is excluded (large binary files not needed for runtime)
+/.next/cache/
 /out/
 
 # production
