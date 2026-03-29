@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev --webpack",
     "prebuild": "node -e \"const fs=require('fs');try{fs.rmSync('.next',{recursive:true,force:true})}catch(e){}\"",
-    "build": "next build --webpack",
-    "export": "next build --webpack",
-    "start": "next start --webpack",
+    "build": "node --max-old-space-size=1024 node_modules/next/dist/bin/next build --webpack",
+    "export": "node --max-old-space-size=1024 node_modules/next/dist/bin/next build --webpack",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -29,7 +29,7 @@
     "@types/react-dom": "^18",
     "@types/three": "^0.160.0",
     "autoprefixer": "^10.0.1",
-    "eslint": "^10.1.0",
+    "eslint": "^9.0.0",
     "eslint-config-next": "^16.2.1",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",

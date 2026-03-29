@@ -1,0 +1,21 @@
+{
+  "components\\hero\\CarHero.tsx -> ./Hero3d": {
+    "id": 3645,
+    "files": [
+      "static/chunks/b536a0f1.6850b2e450490240.js",
+      "static/chunks/645.ee70fa24ca39c3da.js"
+    ]
+  },
+  "node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
+    "id": 1966,
+    "files": [
+      "static/chunks/966.1775eb621d8d3e09.js"
+    ]
+  },
+  "node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
+    "id": 3899,
+    "files": [
+      "static/chunks/899.1813981119fa1f8a.js"
+    ]
+  }
+}
