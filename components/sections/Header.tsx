@@ -128,6 +128,7 @@ export default function Header() {
                   width={40}
                   height={40}
                   className="w-full h-full object-contain"
+                  priority
                 />
               </motion.div>
               <h3 className="font-heading text-xl font-bold tracking-tight text-white">

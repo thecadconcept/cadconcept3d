@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-export const revalidate = 3600 // Revalidate every hour
+export const dynamic = 'force-static'
 
 export async function GET() {
     console.log('Fetching Instagram data...')
