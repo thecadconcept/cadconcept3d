@@ -2,6 +2,17 @@
 
 import { motion } from 'framer-motion'
 
+const teethPoints = Array.from({ length: 12 }).map((_, i) => {
+  const angle = (i / 12) * Math.PI * 2
+  const round = (value: number) => Number(value.toFixed(3))
+  return {
+    x1: round(200 + Math.cos(angle) * 80),
+    y1: round(200 + Math.sin(angle) * 80),
+    x2: round(200 + Math.cos(angle) * 100),
+    y2: round(200 + Math.sin(angle) * 100),
+  }
+})
+
 export default function BlueprintSVG() {
   const pathVariants = {
     hidden: { pathLength: 0, opacity: 0 },
@@ -80,19 +91,14 @@ export default function BlueprintSVG() {
         />
 
         {/* Teeth */}
-        {Array.from({ length: 12 }).map((_, i) => {
-          const angle = (i / 12) * Math.PI * 2
-          const x1 = 200 + Math.cos(angle) * 80
-          const y1 = 200 + Math.sin(angle) * 80
-          const x2 = 200 + Math.cos(angle) * 100
-          const y2 = 200 + Math.sin(angle) * 100
+        {teethPoints.map((point, i) => {
           return (
             <motion.line
               key={i}
-              x1={x1}
-              y1={y1}
-              x2={x2}
-              y2={y2}
+              x1={point.x1}
+              y1={point.y1}
+              x2={point.x2}
+              y2={point.y2}
               stroke="#00E5FF"
               strokeWidth="2"
               variants={pathVariants}
