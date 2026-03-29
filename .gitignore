@@ -8,8 +8,9 @@
 # testing
 /coverage
 
-# next.js
-/.next/
+# next.js — .next is intentionally committed so the server doesn't need to build
+# only the webpack cache is excluded (large binary files not needed for runtime)
+/.next/cache/
 /out/
 
 # production
@@ -23,6 +24,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# app logs
+/logs/*.log
 
 # local env files
 .env*.local
