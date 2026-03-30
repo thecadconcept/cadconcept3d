@@ -1,0 +1,14 @@
+{"timestamp":"00:12:34.510","source":"Server","level":"ERROR","message":"⨯ Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\cadconcept\\.next\\dev\\server\\app-paths-manifest.json'"}
+{"timestamp":"00:12:36.249","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"00:12:36.249","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"00:12:37.243","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"00:12:37.244","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"00:12:38.308","source":"Server","level":"ERROR","message":"⨯ Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\cadconcept\\.next\\dev\\routes-manifest.json'"}
+{"timestamp":"00:12:38.675","source":"Server","level":"ERROR","message":"⨯ Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\cadconcept\\.next\\dev\\routes-manifest.json'"}
+{"timestamp":"00:12:38.945","source":"Server","level":"ERROR","message":"⨯ Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\cadconcept\\.next\\dev\\routes-manifest.json'"}
+{"timestamp":"00:12:39.233","source":"Server","level":"ERROR","message":"⨯ Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\cadconcept\\.next\\dev\\routes-manifest.json'"}
+{"timestamp":"00:12:39.315","source":"Server","level":"ERROR","message":"⨯ Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\cadconcept\\.next\\dev\\routes-manifest.json'"}
+{"timestamp":"00:12:39.371","source":"Server","level":"ERROR","message":"⨯ Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\cadconcept\\.next\\dev\\routes-manifest.json'"}
+{"timestamp":"00:12:39.455","source":"Server","level":"ERROR","message":"⨯ Error: ENOENT: no such file or directory, open 'C:\\laragon\\www\\cadconcept\\.next\\dev\\routes-manifest.json'"}
+{"timestamp":"00:12:39.680","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"00:12:39.686","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}

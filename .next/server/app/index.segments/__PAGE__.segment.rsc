@@ -1,9 +1,14 @@
 1:"$Sreact.fragment"
-2:I[1304,[],"ClientPageRoot"]
-3:I[4868,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-ed3f0f90288cfa9d.js"],"default"]
-6:I[484,[],"OutletBoundary"]
-7:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],null,["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Z1_4qK57XeVs-GgDPGUFM"}
-4:{}
-5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
-8:null
+2:I[2019,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+3:I[1959,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+4:I[2765,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+5:I[5040,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+6:I[48,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+7:I[3734,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+8:I[5544,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+9:I[5784,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+a:I[9441,["219","static/chunks/219-de67ec1942dec129.js","847","static/chunks/847-d7f2d7b368722659.js","106","static/chunks/106-f54e12a1dfbc8a4d.js","974","static/chunks/app/page-4ecbf1401756feec.js"],"default"]
+b:I[484,[],"OutletBoundary"]
+c:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[[["$","$L2",null,{}],["$","main",null,{"className":"relative overflow-x-hidden","children":[["$","$L3",null,{}],["$","article",null,{"aria-label":"About CAD Concept 3D","children":[["$","$L4",null,{}],["$","$L5",null,{}]]}],["$","section",null,{"aria-label":"Our Services","children":["$","$L6",null,{}]}],["$","section",null,{"aria-label":"Industries We Serve","children":["$","$L7",null,{}]}],["$","section",null,{"aria-label":"Client Testimonials","children":["$","$L8",null,{}]}],["$","section",null,{"aria-label":"Contact Us","id":"contact-section","children":["$","$L9",null,{}]}]]}],["$","$La",null,{}]],null,["$","$Lb",null,{"children":["$","$c",null,{"name":"Next.MetadataOutlet","children":"$@d"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"2ckv2uXjVQmzGb5-Kp5Vj"}
+d:null

@@ -63,10 +63,6 @@ export default function Header() {
     e.preventDefault()
     const targetId = href.replace('#', '')
 
-    // Update URL to reflect the "redirect"
-    window.history.pushState(null, '', href)
-
-    // Set manual scroll flag to prevent scroll listener interference
     isManualScroll.current = true
     setActiveSection(targetId)
     setIsMobileMenuOpen(false)
@@ -82,7 +78,9 @@ export default function Header() {
         behavior: 'smooth',
       })
 
-      // Reset flag after scroll animation (approx 1000ms)
+      // Update hash in URL without triggering Next.js router
+      window.history.replaceState(null, '', href)
+
       setTimeout(() => {
         isManualScroll.current = false
       }, 1000)
