@@ -41,7 +41,6 @@ export default function Footer() {
   return (
     <footer
       ref={ref}
-      id="contact"
       className="relative border-t border-primary/20 bg-gradient-to-b from-background to-background/95 overflow-hidden"
     >
       {/* Background decoration */}
@@ -93,7 +92,14 @@ export default function Footer() {
               <Button
                 variant="primary"
                 className="rounded-full shadow-glow"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  const el = document.getElementById('contact')
+                  if (el) {
+                    const offset = 80
+                    const pos = el.getBoundingClientRect().top + window.pageYOffset - offset
+                    window.scrollTo({ top: pos, behavior: 'smooth' })
+                  }
+                }}
               >
                 Get Started
               </Button>

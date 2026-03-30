@@ -2,24 +2,28 @@
 
 import { useEffect } from 'react'
 
+function isFormElement(target: EventTarget | null): boolean {
+    if (!target || !(target instanceof HTMLElement)) return false
+    const tag = target.tagName
+    return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable
+}
+
 export default function ContentProtection() {
     useEffect(() => {
         const handleContextMenu = (e: MouseEvent) => {
+            if (isFormElement(e.target)) return
             e.preventDefault()
         }
 
         const handleCopy = (e: ClipboardEvent) => {
+            if (isFormElement(e.target)) return
             e.preventDefault()
         }
 
         const handleCut = (e: ClipboardEvent) => {
+            if (isFormElement(e.target)) return
             e.preventDefault()
         }
-
-        // Optional: Prevent paste except in inputs is tricky without interfering logic
-        // But since user asked to disable pasting functionality "for the designated element" (implied site content prevention)
-        // We usually don't block paste unless explicitly needed for security inputs.
-        // I will stick to contextmenu, copy, and cut + select-none CSS.
 
         document.addEventListener('contextmenu', handleContextMenu)
         document.addEventListener('copy', handleCopy)

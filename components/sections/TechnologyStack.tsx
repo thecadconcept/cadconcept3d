@@ -18,7 +18,6 @@ export default function TechnologyStack() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
-  // Duplicate for seamless loop
   const duplicatedTechs = [...technologies, ...technologies]
 
   return (
@@ -33,37 +32,32 @@ export default function TechnologyStack() {
           Technology Stack
         </motion.h2>
 
-        <div className="relative">
-          {/* Marquee container */}
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-12"
-              animate={{
-                x: [0, -50 * 8 * 16], // Move by width of all items
-              }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: 'loop',
-                  duration: 30,
-                  ease: 'linear',
-                },
-              }}
-            >
-              {duplicatedTechs.map((tech, index) => (
-                <motion.div
-                  key={index}
-                  className="flex-shrink-0 px-8 py-4 border border-primary/30 bg-background/50 backdrop-blur-sm text-2xl font-bold uppercase tracking-wider text-primary whitespace-nowrap"
-                  whileHover={{ scale: 1.1, borderColor: '#00E5FF' }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {tech}
-                </motion.div>
-              ))}
-            </motion.div>
+        <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex gap-6 animate-marquee w-max">
+            {duplicatedTechs.map((tech, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 px-8 py-4 border border-primary/30 bg-background/50 backdrop-blur-sm text-2xl font-bold uppercase tracking-wider text-primary whitespace-nowrap hover:border-primary hover:scale-105 transition-all duration-300"
+              >
+                {tech}
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   )
 }
