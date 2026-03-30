@@ -27,6 +27,7 @@ export default function WhyChooseUs() {
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="text-primary font-mono text-sm tracking-widest uppercase mb-4"
           >
             Our Advantage
@@ -64,7 +65,7 @@ function StatCard({ stat, isInView, index }: { stat: any, isInView: boolean, ind
       </div>
 
       <div className="text-5xl md:text-6xl font-bold font-heading text-white mb-2 tracking-tight">
-        {stat.value}<span className="text-primary text-3xl">{stat.stat?.suffix || stat.suffix}</span>
+        {stat.value}<span className="text-primary text-3xl">{stat.suffix}</span>
       </div>
 
       <h3 className="text-xl text-primary/80 font-medium mb-2">{stat.label}</h3>

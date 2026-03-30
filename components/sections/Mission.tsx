@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export default function Mission() {
     return (
-        <section className="relative h-screen flex items-center overflow-hidden">
+        <section className="relative min-h-[100svh] flex items-center py-16 md:py-0 overflow-hidden">
 
             {/* Background Video Layer */}
             <div className="absolute inset-0 z-0">
@@ -16,7 +16,8 @@ export default function Mission() {
                     alt="Mission Background"
                     fill
                     className="object-cover"
-                    priority
+                    loading="lazy"
+                    sizes="100vw"
                 />
                 {/* Overlay for readability */}
                 <div className="absolute inset-0 bg-black/70 z-10" />
@@ -37,7 +38,7 @@ export default function Mission() {
                             <p className="text-primary font-mono tracking-widest text-sm uppercase mb-4">
                                 Our Mission
                             </p>
-                            <h2 className="text-5xl md:text-7xl font-bold font-heading text-white leading-tight">
+                            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold font-heading text-white leading-tight">
                                 Excel. <br />
                                 Exceed. <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
@@ -62,7 +63,7 @@ export default function Mission() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.4 }}
                         >
-                            <div className="flex gap-8 mt-8 text-sm font-mono text-gray-400">
+                            <div className="flex flex-wrap gap-6 sm:gap-8 mt-8 text-sm font-mono text-gray-400">
                                 <div>
                                     <span className="block text-white text-2xl font-bold">
                                         <CountUp to={250} suffix="+" pad={0} delay={0.6} className="inline-block" />

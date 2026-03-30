@@ -13,7 +13,7 @@ const contactInfo = [
     icon: '📍',
     label: 'Address',
     value: 'Ahmedabad, Gujarat, India',
-    link: '#',
+    link: 'https://maps.google.com/?q=Ahmedabad,Gujarat,India',
   },
   {
     icon: '📞',
@@ -184,22 +184,22 @@ export default function Contact() {
 
       <Container className="relative z-10">
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="font-heading text-4xl md:text-5xl font-bold uppercase tracking-widest gradient-text mb-6">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-wider sm:tracking-widest gradient-text mb-6">
             Get In Touch
           </h2>
-          <p className="text-xl text-accent max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-accent max-w-2xl mx-auto">
             Ready to transform your physical parts into precision CAD models?
             Let&apos;s discuss your project.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-2 gap-12 lg:gap-16"
+          className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
@@ -207,33 +207,35 @@ export default function Contact() {
           {/* Contact Information */}
           <motion.div variants={itemVariants} className="space-y-8">
             <div>
-              <h3 className="font-heading text-2xl font-bold uppercase tracking-wide mb-6 text-primary">
+              <h3 className="font-heading text-xl sm:text-2xl font-bold uppercase tracking-wide mb-4 sm:mb-6 text-primary">
                 Contact Information
               </h3>
-              <p className="text-accent mb-8 leading-relaxed">
+              <p className="text-accent mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
                 We&apos;re here to help you with all your reverse engineering and
                 scan to CAD needs. Reach out to us through any of the following
                 channels.
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {contactInfo.map((info, index) => (
                 <motion.a
                   key={index}
                   href={info.link}
-                  className="flex items-start gap-4 p-6 border border-primary/30 bg-background/50 backdrop-blur-sm hover:border-primary transition-all duration-300 group rounded-lg"
+                  target={info.link.startsWith('http') ? '_blank' : undefined}
+                  rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 border border-primary/30 bg-background/50 backdrop-blur-sm hover:border-primary transition-all duration-300 group rounded-lg overflow-hidden"
                   variants={itemVariants}
                   whileHover={{ x: 5, transition: { duration: 0.3 } }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-2xl flex-shrink-0 group-hover:bg-primary/30 transition-colors">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0 group-hover:bg-primary/30 transition-colors">
                     {info.icon}
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h4 className="text-sm uppercase tracking-wide text-primary mb-1 font-medium">
                       {info.label}
                     </h4>
-                    <p className="text-lg text-foreground group-hover:text-primary transition-colors">
+                    <p className="text-base sm:text-lg text-foreground group-hover:text-primary transition-colors break-all sm:break-normal">
                       {info.value}
                     </p>
                   </div>
@@ -247,15 +249,22 @@ export default function Contact() {
                 Follow Us
               </h4>
               <div className="flex gap-4">
-                {['LinkedIn', 'Twitter', 'Instagram'].map((social, index) => (
+                {[
+                  { name: 'Instagram', letter: 'I', url: 'https://www.instagram.com/cadconcept3d' },
+                  { name: 'LinkedIn', letter: 'L', url: 'https://www.linkedin.com/company/cadconcept3d' },
+                  { name: 'WhatsApp', letter: 'W', url: 'https://wa.me/918401440804' },
+                ].map((social, index) => (
                   <motion.a
                     key={index}
-                    href="#"
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
                     className="w-12 h-12 rounded-full border border-primary/30 bg-background/50 backdrop-blur-sm flex items-center justify-center text-primary hover:border-primary hover:bg-primary/10 transition-all"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span className="text-sm font-bold">{social[0]}</span>
+                    <span className="text-sm font-bold">{social.letter}</span>
                   </motion.a>
                 ))}
               </div>
@@ -266,7 +275,8 @@ export default function Contact() {
           <motion.div variants={itemVariants}>
             <form
               onSubmit={handleSubmit}
-              className="space-y-6 p-8 border border-primary/30 bg-background/50 backdrop-blur-sm rounded-xl"
+              aria-label="Contact form"
+              className="space-y-6 p-6 sm:p-8 border border-primary/30 bg-background/50 backdrop-blur-sm rounded-xl"
             >
               <div>
                 <label
@@ -320,7 +330,7 @@ export default function Contact() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 gap-2">
+              <div>
                 <label
                   htmlFor="file"
                   className="block text-sm uppercase tracking-wide text-primary mb-2 font-medium"
@@ -342,7 +352,7 @@ export default function Contact() {
                     {file ? (
                       <div className="flex items-center gap-2 text-primary">
                         <span className="text-xl">📄</span>
-                        <span className="text-sm font-medium truncate max-w-[200px]">{file.name}</span>
+                        <span className="text-sm font-medium truncate max-w-[150px] sm:max-w-[200px]">{file.name}</span>
                         <span className="text-xs text-accent">({(file.size / 1024).toFixed(1)} KB)</span>
                       </div>
                     ) : (

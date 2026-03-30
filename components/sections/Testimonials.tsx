@@ -104,6 +104,7 @@ export default function Testimonials() {
                     <motion.h4
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         className="text-primary font-mono text-sm tracking-widest uppercase mb-4"
                     >
                         Client Feedback
@@ -111,6 +112,7 @@ export default function Testimonials() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-bold font-heading text-white"
                     >
@@ -118,7 +120,7 @@ export default function Testimonials() {
                     </motion.h2>
                 </div>
 
-                <div className="relative max-w-4xl mx-auto h-[400px] md:h-[300px] flex items-center justify-center">
+                <div className="relative max-w-4xl mx-auto h-[350px] sm:h-[320px] md:h-[300px] flex items-center justify-center">
                     <AnimatePresence initial={false} custom={direction}>
                         <motion.div
                             key={currentIndex}
@@ -134,13 +136,13 @@ export default function Testimonials() {
                             }}
                             className="absolute w-full"
                         >
-                            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 text-center shadow-xl">
+                            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-12 text-center shadow-xl">
                                 {/* Quote Icon */}
-                                <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-secondary text-2xl font-serif">
+                                <div className="mx-auto mb-4 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-secondary text-xl sm:text-2xl font-serif">
                                     &quot;
                                 </div>
 
-                                <p className="text-lg md:text-2xl text-white font-light leading-relaxed mb-8 mt-4">
+                                <p className="text-base sm:text-lg md:text-2xl text-white font-light leading-relaxed mb-6 sm:mb-8">
                                     {testimonials[currentIndex].content}
                                 </p>
 

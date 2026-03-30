@@ -31,7 +31,7 @@ export default function CarHero() {
     }
 
     return (
-        <section id="home" className="relative w-full h-screen bg-background overflow-hidden">
+        <section id="home" className="relative w-full min-h-[100svh] bg-background overflow-hidden">
 
             {/* 3D Scene Layer */}
             <Hero3D />
@@ -41,7 +41,7 @@ export default function CarHero() {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-background/20 to-background/80 pointer-events-none z-10" />
 
             {/* Content Layer */}
-            <Container className="relative z-20 h-full flex flex-col justify-center pointer-events-none">
+            <Container className="relative z-20 min-h-[100svh] flex flex-col justify-center pointer-events-none py-24">
                 <div className="max-w-3xl pointer-events-auto">
 
                     <motion.div
@@ -61,13 +61,13 @@ export default function CarHero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     >
-                        <h1 className="text-6xl md:text-8xl font-bold font-heading text-white mb-6 leading-tight tracking-tight">
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-heading text-white mb-6 leading-tight tracking-tight">
                             Engineering  <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-primary animate-gradient-x">
                                 <TypewriterText text="Excellence" delay={1000} speed={150} cursor={false} loop={true} />
                             </span>
                         </h1>
-                        <p className="text-accent text-lg md:text-xl max-w-xl mb-10 leading-relaxed font-light">
+                        <p className="text-accent text-base sm:text-lg md:text-xl max-w-xl mb-8 sm:mb-10 leading-relaxed font-light">
                             From reality to digital precision—engineering high-accuracy CAD models and additive manufacturing solutions for next-generation industries.
                         </p>
 

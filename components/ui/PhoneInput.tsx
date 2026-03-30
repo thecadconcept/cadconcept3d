@@ -114,7 +114,7 @@ export default function PhoneInput({
                     <button
                         type="button"
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        className="flex items-center gap-2 px-3 py-3 bg-secondary-900/80 border border-primary/30 text-foreground hover:border-primary transition-all rounded-md min-w-[120px]"
+                        className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-3 bg-secondary-900/80 border border-primary/30 text-foreground hover:border-primary transition-all rounded-md min-w-[100px] sm:min-w-[120px]"
                     >
                         <span className="text-2xl">{selectedCountry.flag}</span>
                         <span className="text-sm font-medium">{selectedCountry.dialCode}</span>
@@ -135,7 +135,7 @@ export default function PhoneInput({
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.2 }}
-                                className="absolute z-50 mt-2 w-80 bg-secondary-900 border border-primary/30 rounded-lg shadow-2xl overflow-hidden"
+                                className="absolute z-50 mt-2 w-[calc(100vw-3rem)] sm:w-80 bg-secondary-900 border border-primary/30 rounded-lg shadow-2xl overflow-hidden"
                             >
                                 {/* Search Input */}
                                 <div className="p-3 border-b border-primary/20">

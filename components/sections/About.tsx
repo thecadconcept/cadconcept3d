@@ -64,7 +64,7 @@ export default function About() {
               <p className="text-primary font-mono tracking-widest text-xs md:text-sm uppercase mb-4">
                 Who We Are
               </p>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold font-heading text-white leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-heading text-white leading-tight">
                 Precision. <br />
                 Passion. <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-info">

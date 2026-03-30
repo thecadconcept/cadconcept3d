@@ -63,10 +63,6 @@ export default function Header() {
     e.preventDefault()
     const targetId = href.replace('#', '')
 
-    // Update URL to reflect the "redirect"
-    window.history.pushState(null, '', href)
-
-    // Set manual scroll flag to prevent scroll listener interference
     isManualScroll.current = true
     setActiveSection(targetId)
     setIsMobileMenuOpen(false)
@@ -82,7 +78,9 @@ export default function Header() {
         behavior: 'smooth',
       })
 
-      // Reset flag after scroll animation (approx 1000ms)
+      // Update hash in URL without triggering Next.js router
+      window.history.replaceState(null, '', href)
+
       setTimeout(() => {
         isManualScroll.current = false
       }, 1000)
@@ -218,7 +216,7 @@ export default function Header() {
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-40 bg-background/95 lg:hidden flex flex-col justify-center items-center"
           >
-            <nav className="w-full max-w-sm px-6">
+            <nav className="w-full max-w-sm px-6" aria-label="Mobile navigation">
               <ul className="space-y-4 flex flex-col items-center">
                 {navItems.map((item, index) => (
                   <motion.li
@@ -254,6 +252,7 @@ export default function Header() {
                   variant="primary"
                   size="lg"
                   className="rounded-full shadow-glow hover:shadow-glow-strong"
+                  onClick={(e) => handleNavClick(e, '#contact')}
                 >
                   Start Project
                 </Button>

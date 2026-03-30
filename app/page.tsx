@@ -1,5 +1,3 @@
-'use client'
-
 import Header from '@/components/sections/Header'
 import CarHero from '@/components/hero/CarHero'
 import Mission from '@/components/sections/Mission'
